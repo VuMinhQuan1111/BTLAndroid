@@ -1,0 +1,79 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".SignIn"
+    android:background="@drawable/background"
+    >
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bottom_nav">
+
+    </androidx.viewpager.widget.ViewPager>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/menu_bottom_nav"
+        app:itemBackground="@color/salmon"
+        app:itemIconTint="@color/black"
+        app:itemTextColor="@color/black"
+        >
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:id="@+id/game_title"
+            android:text="Bird Invaders"
+            android:paddingTop="100px"
+            android:textSize="100dp"
+            android:textColor="@color/black"/>
+
+        <Button
+            android:id="@+id/play"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_margin="8dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/salmon"
+            android:textColor="@color/white"
+            android:text="Play"
+            android:textSize="25dp" />
+
+        <Button
+            android:id="@+id/shop"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_margin="8dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/salmon"
+            android:textColor="@color/white"
+            android:text="Shop"
+            android:textSize="25dp" />
+
+        <Button
+            android:id="@+id/credit"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_margin="8dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/salmon"
+            android:textColor="@color/white"
+            android:text="Credit"
+            android:textSize="25dp" />
+    </LinearLayout>
+
+
+</RelativeLayout>
