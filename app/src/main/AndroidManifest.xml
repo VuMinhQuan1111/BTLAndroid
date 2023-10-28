@@ -13,17 +13,29 @@
         android:theme="@style/Theme.Game"
         tools:targetApi="34">
         <activity
-            android:name=".SignIn"
+            android:screenOrientation="landscape"
+            android:name=".SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".MainActivity" />
-        <activity android:name=".SignUp" />
-        <activity android:name=".HighScore" />
-        <activity android:name=".User"/>
+        </activity>\
+        <activity
+            android:screenOrientation="landscape"
+            android:name=".SignIn" />
+        <activity
+            android:screenOrientation="landscape"
+            android:name=".SignUp" />
+        <activity
+            android:screenOrientation="landscape"
+            android:name=".MainActivity" />
+        <activity
+            android:screenOrientation="landscape"
+            android:name=".HighScore" />
+        <activity
+            android:screenOrientation="landscape"
+            android:name=".User"/>
 
     </application>
 

@@ -5,13 +5,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".HighScore"
-    android:gravity="center"
-    android:background="@drawable/background">
+    android:background="@drawable/main_menu">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
         android:layout_height="75dp"
-        android:gravity="center"
         android:background="@color/salmon"
         android:id="@+id/top">
 
@@ -27,16 +25,27 @@
             android:layout_marginLeft="20dp"
             />
 
+        <TextView
+            android:id="@+id/back_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:layout_gravity="right"
+            android:textSize="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="20dp"
+            />
+
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_nav"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/salmon"
-        android:layout_alignParentBottom="true"
-        app:menu="@menu/menu_bottom_nav"
-        app:itemIconTint="@color/black"/>
+<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--        android:id="@+id/bottom_nav"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="@color/salmon"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        app:menu="@menu/menu_bottom_nav"-->
+<!--        app:itemIconTint="@color/black"/>-->
 
 </RelativeLayout>

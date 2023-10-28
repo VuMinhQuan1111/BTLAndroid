@@ -20,45 +20,58 @@ public class User extends Activity {
 
     private ImageView userAvatar;
     private TextView tvName;
+
+    private TextView back;
     private TextView tvGmail;
 
     private Button SOut;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user);
 
+        back = findViewById(R.id.back_btn);
+
         initUi();
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
-
-        bottomNavigationView.setSelectedItemId(R.id.action_user);
-
-        //nhấp chuột vào 3 icon ở dưới cùng
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch(item.getItemId()){
-
-                    case R.id.action_home:
-                        startActivity(new Intent(getApplicationContext()
-                                ,MainActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-
-                    case R.id.action_score:
-                        startActivity(new Intent(getApplicationContext()
-                                ,HighScore.class));
-                        overridePendingTransition(0,0);
-                        return true;
-
-                    case R.id.action_user:
-                        return true;
-
-                }
-                return false;
+            public void onClick(View v) {
+                Intent intent = new Intent(User.this, MainActivity.class);
+                startActivity(intent);
             }
         });
+
+//        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
+//
+//        bottomNavigationView.setSelectedItemId(R.id.action_user);
+//
+//        //nhấp chuột vào 3 icon ở dưới cùng
+//        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                switch(item.getItemId()){
+//
+//                    case R.id.action_home:
+//                        startActivity(new Intent(getApplicationContext()
+//                                ,MainActivity.class));
+//                        overridePendingTransition(0,0);
+//                        return true;
+//
+//                    case R.id.action_score:
+//                        startActivity(new Intent(getApplicationContext()
+//                                ,HighScore.class));
+//                        overridePendingTransition(0,0);
+//                        return true;
+//
+//                    case R.id.action_user:
+//                        return true;
+//
+//                }
+//                return false;
+//            }
+//        });
         SignOut();
         showUserInfomation();
     }
