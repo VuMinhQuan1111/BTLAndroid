@@ -55,7 +55,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_toRightOf="@+id/play"
                 android:background="@color/salmon"
-                android:text="Shop"
+                android:text="Medal"
                 android:textSize="25dp"
                 android:layout_weight="1"/>
 
