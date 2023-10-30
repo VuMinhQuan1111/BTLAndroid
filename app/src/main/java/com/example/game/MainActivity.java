@@ -15,7 +15,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends Activity {
 
-    private Button highscore, user;
+    private Button highscore, user, play;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +23,7 @@ public class MainActivity extends Activity {
 
         highscore = findViewById(R.id.highScore);
         user = findViewById(R.id.userProfile);
-
+        play = findViewById(R.id.play);
 
         highscore.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,5 +69,15 @@ public class MainActivity extends Activity {
 //                return false;
 //            }
 //        });
+
+        //Nhấn vào chơi game
+
+        play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, GameActivity.class));
+            }
+        });
+
     }
 }
