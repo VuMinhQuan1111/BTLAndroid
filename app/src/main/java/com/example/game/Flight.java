@@ -8,7 +8,7 @@ import static com.example.game.GameView.screenRatioX;
 import static com.example.game.GameView.screenRatioY;
 public class Flight {
     int toShoot = 0;
-    boolean isGoingUp = false;
+    boolean isGoingUp ;
     int x, y, width, height, wingCounter = 0, shootCounter = 1;
     Bitmap flight1, flight2, shoot1, shoot2, shoot3, shoot4, shoot5, dead;
     private GameView gameView;

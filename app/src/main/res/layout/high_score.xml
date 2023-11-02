@@ -5,36 +5,35 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".HighScore"
-    android:background="@drawable/main_menu">
+    android:background="@drawable/login"
+    >
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/top"
         android:layout_width="match_parent"
         android:layout_height="75dp"
-        android:background="@color/salmon"
-        android:id="@+id/top">
+        android:background="@color/salmon">
 
 
         <TextView
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="High Score"
             android:layout_gravity="left"
-            android:textSize="30dp"
-            android:layout_marginTop="15dp"
             android:layout_marginLeft="20dp"
-            />
+            android:layout_marginTop="15dp"
+            android:text="High Score"
+            android:textSize="30dp" />
 
         <TextView
             android:id="@+id/back_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Back"
             android:layout_gravity="right"
-            android:textSize="30dp"
             android:layout_marginTop="15dp"
             android:layout_marginRight="20dp"
-            />
+            android:text="Back"
+            android:textSize="30dp" />
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 

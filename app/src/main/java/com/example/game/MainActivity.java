@@ -6,16 +6,19 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends Activity {
 
     private Button highscore, user, play;
+    private boolean isMute;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +27,33 @@ public class MainActivity extends Activity {
         highscore = findViewById(R.id.highScore);
         user = findViewById(R.id.userProfile);
         play = findViewById(R.id.play);
+
+        final SharedPreferences prefs = getSharedPreferences("game", MODE_PRIVATE);
+        isMute = prefs.getBoolean("isMute", false);
+
+        final ImageView volumeCtrl = findViewById(R.id.volumeCtrl);
+
+        if (isMute)
+            volumeCtrl.setImageResource(R.drawable.ic_volume_off_black_24dp);
+        else
+            volumeCtrl.setImageResource(R.drawable.ic_volume_up_black_24dp);
+
+        volumeCtrl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                isMute = !isMute;
+                if (isMute)
+                    volumeCtrl.setImageResource(R.drawable.ic_volume_off_black_24dp);
+                else
+                    volumeCtrl.setImageResource(R.drawable.ic_volume_up_black_24dp);
+
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putBoolean("isMute", isMute);
+                editor.apply();
+
+            }
+        });
 
         highscore.setOnClickListener(new View.OnClickListener() {
             @Override
