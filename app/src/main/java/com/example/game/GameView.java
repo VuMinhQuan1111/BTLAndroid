@@ -14,6 +14,16 @@ import android.os.Build;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 
+import androidx.annotation.NonNull;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -40,9 +50,21 @@ public class GameView extends SurfaceView implements Runnable {
 
     private boolean win=false;
 
-    int n=4;
-    int target;
+    private int n=4;
+    private int target;
 
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference("Scrore");
+
+
+    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+
+    boolean check=false;
+
+
+    public GameView(Context context){
+        super(context);
+    }
 
     public GameView(GameActivity activity, int screenX, int screenY) {
         super(activity);
@@ -89,7 +111,7 @@ public class GameView extends SurfaceView implements Runnable {
         paint.setColor(Color.WHITE);
 
         random = new Random();
-        n = random.nextInt(7) + 4;
+        n = random.nextInt(3) + 3;
 
         flightAM = new FlightAM[n];
 
@@ -195,11 +217,13 @@ public class GameView extends SurfaceView implements Runnable {
                     return;
                 }
 
-                int bound = (int) (30 * screenRatioX);
-                fliAM.speed = random.nextInt(bound);
+                //int bound = (int) (30 * screenRatioX);
+                //fliAM.speed = random.nextInt(bound);
+                int bound =random.nextInt(4)+4;
+                fliAM.speed=bound;
 
-                if (fliAM.speed < 10 * screenRatioX)
-                    fliAM.speed = (int) (10 * screenRatioX);
+                //if (fliAM.speed < 10 * screenRatioX)
+                   //fliAM.speed = (int) (10 * screenRatioX);
 
                 fliAM.x = screenX;
                 fliAM.y = random.nextInt(screenY - fliAM.height);
@@ -239,14 +263,26 @@ public class GameView extends SurfaceView implements Runnable {
             for (FlightAM fl : flightAM)
                 canvas.drawBitmap(fl.getFlightAM(), fl.x, fl.y, paint);
 
-            canvas.drawText(score + "", screenX / 2f, 164, paint);
-            canvas.drawText("Mục tiêu:"+target , screenX/5f , 164, paint);
+
+            paint.setTextSize(100);
+            paint.setColor(Color.GREEN);
+            paint.setFakeBoldText(true);
+            canvas.drawText(score + "", screenX / 2f, 100, paint);
+
+            paint.setTextSize(50);
+            float textWidthMT = paint.measureText("Mục tiêu:");
+            float xMT = (screenX - textWidthMT) / 7f;
+            float yMT = 100;
+
+            paint.setColor(Color.RED);
+            paint.setFakeBoldText(true);
+            canvas.drawText("Mục tiêu: "+target , xMT , yMT, paint);
 
             if(isGameOver==true && win==true){
                 isPlaying = false;
                 paint.setColor(Color.GREEN);
 
-                paint.setTextSize(250);
+                paint.setTextSize(100);
                 float textWidth = paint.measureText("Bạn Thắng");
 
                 float x = (screenX - textWidth) / 2;
@@ -264,7 +300,7 @@ public class GameView extends SurfaceView implements Runnable {
                 isPlaying = false;
                 paint.setColor(Color.RED);
 
-                paint.setTextSize(250);
+                paint.setTextSize(100);
                 float textWidth = paint.measureText("Bạn Thua");
 
                 float x = (screenX - textWidth) / 2;
@@ -275,6 +311,48 @@ public class GameView extends SurfaceView implements Runnable {
                 canvas.drawBitmap(flight.getDead(), flight.x, flight.y, paint);
                 getHolder().unlockCanvasAndPost(canvas);
                 //saveIfHighScore();
+
+                FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+
+
+                myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                        if(snapshot.exists()){
+                            for (DataSnapshot snapshott : snapshot.getChildren()) {
+                                Score scorer = snapshott.getValue(Score.class);
+                                if(scorer.idus.equals(firebaseUser.getUid())){
+                                    scorer.setScore(score);
+                                    // Thực hiện cập nhật
+                                    myRef.child(snapshott.getKey()).setValue(scorer);
+
+                                    //myRef.child(snapshott.getKey()).child("score").setValue(score);
+                                    check=true;
+                                    break;
+                                }
+                                else{
+                                    check=false;
+                                }
+                            }
+                        }
+
+                        if(check==false){
+                            String userIdSc = myRef.push().getKey();
+                            // creating user object
+                            Score usersc = new Score(firebaseUser.getUid(), score);
+
+                            // pushing user to 'users' node using the userId
+                            myRef.child(userIdSc).setValue(usersc);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
                 waitBeforeExiting ();
                 return;
             }

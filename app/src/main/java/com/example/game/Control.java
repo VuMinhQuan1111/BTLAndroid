@@ -9,11 +9,9 @@ import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 
 public class Control {
-    //int toShoot = 0; // BẮn
-    //boolean isGoingUp ; //Đang đi lên
-    //boolean tthai=true;
-    int x, y, width, height;//x,y: Trục tung/Hoành, Dài rộng , Bộ đếm chim, Đếm Bắn
-    Bitmap wing1,wing2; // Ảnh máy bay, Ảnh bắn đạn , Ảnh Chết
+
+    int x, y, width, height;
+    Bitmap wing1,wing2;
     private GameView gameView; // Dối tượng Game View
 
     // KHỞI TẠO
@@ -34,8 +32,8 @@ public class Control {
         //width /= 8;
         //height /=8;
 
-        width /= 12;
-        height /=12;
+        width /= 17;
+        height /=17;
 
         //Nhân với tỷ lệ màn hình ở gameview
         width = (int) (width * screenRatioX);
@@ -46,11 +44,6 @@ public class Control {
         //Tạo một bitmap mới, được chia tỷ lệ từ bitmap hiện có, khi có thể.
         wing1 = Bitmap.createScaledBitmap(wing1, width, height, false);
         wing2 = Bitmap.createScaledBitmap(wing2, width, height, false);
-
-
-        //????
-        //y = screenY / 2;
-        //x = (int) (64 * screenRatioX);
 
     }
 

@@ -9,7 +9,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 
 public class FlightAM {
-    public int speed = 20; // Tốc độ
+    public int speed = 2; // Tốc độ
     public boolean wasShot = true; // Bị bắn
     int x = 0, y, width, height, birdCounter = 1; //Dài, Rộng, Số Chim
     Bitmap fl1; // Ảnh chim
@@ -25,8 +25,8 @@ public class FlightAM {
         height = fl1.getHeight();
 
         //Chia nhỏ chiều rộng chiều cao
-        width /= 6;
-        height /= 6;
+        width /= 15;
+        height /= 15;
 
         //Nhân với tỷ lệ màn hình ở gameview
         width = (int) (width * screenRatioX);

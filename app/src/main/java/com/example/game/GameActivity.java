@@ -76,10 +76,10 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         if (event.sensor.getType() == Sensor.TYPE_GYROSCOPE) {
             float valuez=event.values[2];
             float valuex=event.values[1];
-            if (valuez > 0.5f||valuex<0) {
+            if (valuez > 0.5f || valuex > 0) {
                 gameView.flight.isGoingUp=true;
 
-            } else if (valuez < -0.5f||valuex>0) {
+            } else if (valuez < -0.5f || valuex < 0) {
                 gameView.flight.isGoingUp=false;
 
             }
