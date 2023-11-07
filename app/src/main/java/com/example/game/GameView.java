@@ -48,13 +48,18 @@ public class GameView extends SurfaceView implements Runnable {
     public boolean isDask=false;
     private SharedPreferences prefs;
 
-    private boolean win=false;
+    //private boolean win=false;
 
     private int n=4;
-    private int target;
+    //private int target;
+
+    private volatile boolean currentState = true;
+    private static final long STATE_DURATION = 15000; // 10 seconds
+    private static final long SWITCH_DELAY = 1000; // 2 seconds
+    private int Levelofdifficult=5;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("Scrore");
+    DatabaseReference myRef = database.getReference("Score");
 
 
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
@@ -122,7 +127,7 @@ public class GameView extends SurfaceView implements Runnable {
 
         }
 
-        target= random.nextInt(51) + 50;
+        //target= random.nextInt(51) + 50;
 
 
     }
@@ -130,7 +135,18 @@ public class GameView extends SurfaceView implements Runnable {
     @Override
     public void run() {
 
+        long startTime = System.currentTimeMillis();
+        long switchTime = startTime + STATE_DURATION;
+
         while (isPlaying) {
+            long currentTime = System.currentTimeMillis();
+            if (currentTime >= switchTime) {
+                currentState = !currentState;
+                if(currentState==false){
+                    Levelofdifficult+=5;
+                }
+                switchTime = currentTime + (currentState ? STATE_DURATION : SWITCH_DELAY);
+            }
 
             update ();
             draw ();
@@ -140,11 +156,11 @@ public class GameView extends SurfaceView implements Runnable {
 
     private void update () {
 
-        if(score>=target){
+        /*if(score>=target){
             win=true;
             isGameOver=true;
             return;
-        }
+        }*/
 
         control1.x = screenX/7;
         control1.y=screenY/5*4-control1.height;
@@ -212,18 +228,12 @@ public class GameView extends SurfaceView implements Runnable {
             if (fliAM.x + fliAM.width < 0) {
 
                 if (!fliAM.wasShot) {
-                    win=false;
+                    //win=false;
                     isGameOver = true;
                     return;
                 }
 
-                //int bound = (int) (30 * screenRatioX);
-                //fliAM.speed = random.nextInt(bound);
-                int bound =random.nextInt(4)+4;
-                fliAM.speed=bound;
-
-                //if (fliAM.speed < 10 * screenRatioX)
-                   //fliAM.speed = (int) (10 * screenRatioX);
+                fliAM.speed=Levelofdifficult;
 
                 fliAM.x = screenX;
                 fliAM.y = random.nextInt(screenY - fliAM.height);
@@ -232,7 +242,7 @@ public class GameView extends SurfaceView implements Runnable {
             }
 
             if (Rect.intersects(fliAM.getCollisionShape(), flight.getCollisionShape())) {
-                win=false;
+                //win=false;
                 isGameOver = true;
                 return;
             }
@@ -269,44 +279,18 @@ public class GameView extends SurfaceView implements Runnable {
             paint.setFakeBoldText(true);
             canvas.drawText(score + "", screenX / 2f, 100, paint);
 
-            paint.setTextSize(50);
-            float textWidthMT = paint.measureText("Mục tiêu:");
-            float xMT = (screenX - textWidthMT) / 7f;
-            float yMT = 100;
 
-            paint.setColor(Color.RED);
-            paint.setFakeBoldText(true);
-            canvas.drawText("Mục tiêu: "+target , xMT , yMT, paint);
-
-            if(isGameOver==true && win==true){
+            if (isGameOver==true) {
                 isPlaying = false;
                 paint.setColor(Color.GREEN);
 
                 paint.setTextSize(100);
-                float textWidth = paint.measureText("Bạn Thắng");
+                float textWidth = paint.measureText("Bạn đã được số điểm: ");
 
                 float x = (screenX - textWidth) / 2;
                 float y = screenY / 2f;
 
-                canvas.drawText( "Bạn Thắng",x, y, paint);
-
-                canvas.drawBitmap(flight.getFlight(), flight.x, flight.y, paint);
-                getHolder().unlockCanvasAndPost(canvas);
-                waitBeforeExiting ();
-                return;
-            }
-
-            if (isGameOver==true && win==false) {
-                isPlaying = false;
-                paint.setColor(Color.RED);
-
-                paint.setTextSize(100);
-                float textWidth = paint.measureText("Bạn Thua");
-
-                float x = (screenX - textWidth) / 2;
-                float y = screenY / 2f;
-
-                canvas.drawText( "Bạn Thua",x, y, paint);
+                canvas.drawText( "Bạn đã được số điểm: "+score,x, y, paint);
 
                 canvas.drawBitmap(flight.getDead(), flight.x, flight.y, paint);
                 getHolder().unlockCanvasAndPost(canvas);
@@ -321,13 +305,13 @@ public class GameView extends SurfaceView implements Runnable {
 
                         if(snapshot.exists()){
                             for (DataSnapshot snapshott : snapshot.getChildren()) {
-                                Score scorer = snapshott.getValue(Score.class);
-                                if(scorer.idus.equals(firebaseUser.getUid())){
-                                    scorer.setScore(score);
-                                    // Thực hiện cập nhật
-                                    myRef.child(snapshott.getKey()).setValue(scorer);
-
-                                    //myRef.child(snapshott.getKey()).child("score").setValue(score);
+                                ScoreUser usersc = snapshott.getValue(ScoreUser.class);
+                                if(usersc.idus.equals(firebaseUser.getUid())){
+                                    if(score>usersc.score){
+                                        usersc.setScore(score);
+                                        // Thực hiện cập nhật
+                                        myRef.child(snapshott.getKey()).setValue(usersc);
+                                    }
                                     check=true;
                                     break;
                                 }
@@ -337,14 +321,14 @@ public class GameView extends SurfaceView implements Runnable {
                             }
                         }
 
-                        if(check==false){
+                        /*if(check==false){
                             String userIdSc = myRef.push().getKey();
                             // creating user object
                             Score usersc = new Score(firebaseUser.getUid(), score);
 
                             // pushing user to 'users' node using the userId
                             myRef.child(userIdSc).setValue(usersc);
-                        }
+                        }*/
                     }
 
                     @Override

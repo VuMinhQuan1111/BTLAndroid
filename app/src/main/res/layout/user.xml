@@ -16,7 +16,6 @@
 
 
         <TextView
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
@@ -72,8 +71,7 @@
                     android:layout_width="200dp"
                     android:layout_height="200dp"
                     android:layout_marginTop="30dp"
-                    android:src="@drawable/avatar_default" />
-
+                    android:src="@drawable/gamer" />
 
             </LinearLayout>
 
@@ -105,7 +103,7 @@
                 <Button
                     android:id="@+id/gio_hang"
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
+                    android:layout_height="50dp"
                     android:layout_margin="8dp"
                     android:layout_marginTop="10dp"
                     android:text="Edit Profile"
@@ -125,7 +123,7 @@
                 <Button
                     android:id="@+id/sign_out"
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
+                    android:layout_height="50dp"
                     android:layout_margin="8dp"
                     android:layout_marginTop="5dp"
                     android:text="Log Out"

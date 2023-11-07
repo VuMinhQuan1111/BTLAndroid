@@ -28,10 +28,10 @@ public class MainActivity extends Activity {
     private Button highscore, user, play;
     private boolean isMute;
 
-    private TextView score;
+    private TextView score,username;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("Scrore");
+    DatabaseReference myRef = database.getReference("Score");
 
 
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
@@ -45,6 +45,7 @@ public class MainActivity extends Activity {
         user = findViewById(R.id.userProfile);
         play = findViewById(R.id.play);
         score=findViewById(R.id.textViewscore);
+        username=findViewById(R.id.ussername);
 
         final SharedPreferences prefs = getSharedPreferences("game", MODE_PRIVATE);
         isMute = prefs.getBoolean("isMute", false);
@@ -82,9 +83,11 @@ public class MainActivity extends Activity {
 
                 if(snapshot.exists()){
                     for (DataSnapshot snapshott : snapshot.getChildren()) {
-                        Score scorer = snapshott.getValue(Score.class);
-                        if(scorer.idus.equals(firebaseUser.getUid())){
-                            score.setText("Score: "+scorer.score);
+                        //Score scorer = snapshott.getValue(Score.class);
+                        ScoreUser usersc = snapshott.getValue(ScoreUser.class);
+                        if(usersc.idus.equals(firebaseUser.getUid())){
+                            username.setText(usersc.name+"");
+                            score.setText(""+usersc.score);
                             break;
                         }
                         else{

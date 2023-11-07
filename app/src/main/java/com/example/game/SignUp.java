@@ -16,13 +16,15 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class SignUp extends AppCompatActivity {
 
-    private EditText edtgmail,edtpassword;
+    private EditText edtgmail,edtpassword,edtname;;
     private EditText fullname,edtpassword2;
     private Button btnsignup;
     private TextView layoutSignin;
@@ -33,6 +35,7 @@ public class SignUp extends AppCompatActivity {
 
         edtgmail = findViewById(R.id.GmailSU);
         edtpassword = findViewById(R.id.PasswordSU);
+        edtname=findViewById(R.id.Nameus);
         //edtpassword2 = findViewById(R.id.PasswordSU2);
         btnsignup = findViewById(R.id.SignUp);
         layoutSignin = findViewById(R.id.layout_signin);
@@ -81,6 +84,8 @@ public class SignUp extends AppCompatActivity {
     private void onClickSignUp() {
         String strGmail = edtgmail.getText().toString().trim();
         String strPassword = edtpassword.getText().toString().trim();
+        String strname=edtname.getText().toString().trim();
+
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = auth.getCurrentUser();
 //        Toast.makeText(SignUp.this, "currentUser" + currentUser, Toast.LENGTH_LONG).show();
@@ -90,6 +95,18 @@ public class SignUp extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            FirebaseUser user = auth.getCurrentUser();
+                            String userId = user.getUid();
+                            FirebaseDatabase database = FirebaseDatabase.getInstance();
+                            DatabaseReference myRefe = database.getReference("Score");
+
+                            String userIdSc = myRefe.push().getKey();
+                            // creating user object
+                            ScoreUser usersc = new ScoreUser(userId,strname,0);
+
+                            // pushing user to 'users' node using the userId
+                            myRefe.child(userIdSc).setValue(usersc);
+
                             Log.e("test", "1");
                             // Sign in success, update UI with the signed-in user's information
                             Toast.makeText(SignUp.this, "Đăng ký thành công",

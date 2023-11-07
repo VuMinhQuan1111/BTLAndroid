@@ -15,7 +15,16 @@
         android:orientation="vertical"
         android:gravity="center"
         android:layout_marginTop="80dp">
-
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:ems="11"
+            android:id="@+id/Nameus"
+            android:hint="Name"
+            android:imeOptions="actionNext"
+            android:textSize="28dp"
+            />
 
         <EditText
             android:layout_width="wrap_content"
