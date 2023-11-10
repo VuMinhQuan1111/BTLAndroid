@@ -14,9 +14,7 @@
         android:layout_height="75dp"
         android:background="@color/salmon">
 
-
         <TextView
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
@@ -36,15 +34,24 @@
             android:textSize="30dp" />
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
+    <LinearLayout
+        android:layout_below="@+id/top"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-
-<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
-<!--        android:id="@+id/bottom_nav"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="@color/salmon"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        app:menu="@menu/menu_bottom_nav"-->
-<!--        app:itemIconTint="@color/black"/>-->
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginBottom="0dp"
+            android:layout_marginTop="200dp"/>
+        </LinearLayout>
+    </LinearLayout>
 
 </RelativeLayout>
