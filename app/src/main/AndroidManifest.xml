@@ -36,6 +36,9 @@
             />
         <activity
             android:screenOrientation="landscape"
+            android:name=".Bonus"/>
+        <activity
+            android:screenOrientation="landscape"
             android:name=".User"/>
         <activity
             android:name=".GameActivity"
