@@ -44,13 +44,12 @@
             android:layout_height="50dp"
             android:layout_marginStart="150dp"
             android:layout_marginTop="150dp"
-            android:text="Điểm hiện tại: " />
+           />
         <TextView
-            android:id="@+id/txtDiemThuong"
+            android:id="@+id/txtScoreBonus"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_marginStart="150dp"
-            android:text="Điểm thưởng"
             android:layout_below="@+id/txtScore"/>
         <Button
             android:id="@+id/btnNhanThuong"
@@ -58,6 +57,6 @@
             android:layout_height="50dp"
             android:layout_marginStart="150dp"
             android:text="Nhận"
-            android:layout_below="@+id/txtDiemThuong"/>
+            android:layout_below="@+id/txtScoreBonus"/>
     </RelativeLayout>
 </RelativeLayout>

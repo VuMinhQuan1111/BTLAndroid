@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -20,7 +22,9 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Bonus extends AppCompatActivity {
     private int score = 0;
+    private int scoreBonus = 0;
     private TextView txtScore;
+    private TextView txtScoreBonus;
     private Button btnNhanThuong;
     boolean check = false;
     private TextView back;
@@ -35,7 +39,9 @@ public class Bonus extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bonus);
         txtScore = findViewById(R.id.txtScore);
+        txtScoreBonus = findViewById(R.id.txtScoreBonus);
         back = findViewById(R.id.back_btn);
+        btnNhanThuong = findViewById(R.id.btnNhanThuong);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,7 +50,9 @@ public class Bonus extends AppCompatActivity {
             }
         });
 
-        myRef.addValueEventListener(new ValueEventListener() {
+
+
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
@@ -55,7 +63,11 @@ public class Bonus extends AppCompatActivity {
                             score = userScore.score;
                             txtScore.setText("Điểm hiện tại: " + score);
                             check = true;
-                            break;
+
+                            if(score>=0){
+                                scoreBonus += 5;
+                                txtScoreBonus.setText("Điểm thưởng: "+scoreBonus);
+                            }
                         } else {
                             check = false;
                         }
@@ -70,5 +82,41 @@ public class Bonus extends AppCompatActivity {
             }
         });
 
+        btnNhanThuong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                score += scoreBonus;
+               myRef.addValueEventListener(new ValueEventListener() {
+                   @Override
+                   public void onDataChange(@NonNull DataSnapshot snapshot) {
+                       if(snapshot.exists()){
+                           for (DataSnapshot snapshott : snapshot.getChildren()) {
+                               ScoreUser usersc = snapshott.getValue(ScoreUser.class);
+                               if(usersc.idus.equals(firebaseUser.getUid())){
+                                   if(score>usersc.score){
+                                       usersc.setScore(score);
+                                       // Thực hiện cập nhật
+                                       myRef.child(snapshott.getKey()).setValue(usersc);
+                                   }
+                                   check=true;
+                                   break;
+                               }
+                               else{
+                                   check=false;
+                               }
+                           }
+                       }
+
+                   }
+
+                   @Override
+                   public void onCancelled(@NonNull DatabaseError error) {
+
+                   }
+               });
+
+            }
+
+        });
     }
 }
