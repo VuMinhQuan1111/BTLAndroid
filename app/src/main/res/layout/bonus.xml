@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/login"
+    tools:context=".Bonus">
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:background="@color/salmon">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
+            android:text="Bonus"
+            android:textSize="30dp" />
+
+        <TextView
+            android:id="@+id/back_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="20dp"
+            android:text="Back"
+            android:textSize="30dp" />
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+    <RelativeLayout
+        android:layout_below="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/txtScore"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="150dp"
+            android:layout_marginTop="150dp"
+            android:text="Điểm hiện tại: " />
+        <TextView
+            android:id="@+id/txtDiemThuong"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="150dp"
+            android:text="Điểm thưởng"
+            android:layout_below="@+id/txtScore"/>
+        <Button
+            android:id="@+id/btnNhanThuong"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="150dp"
+            android:text="Nhận"
+            android:layout_below="@+id/txtDiemThuong"/>
+    </RelativeLayout>
+</RelativeLayout>

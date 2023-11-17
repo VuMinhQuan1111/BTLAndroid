@@ -3,18 +3,33 @@ package com.example.game;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class HighScore extends Activity {
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference("Score");
 
+
+    ListView listScore;
     private TextView back;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,7 +37,7 @@ public class HighScore extends Activity {
 
         back = findViewById(R.id.back_btn);
 
-
+        Anhxa();
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -32,34 +47,53 @@ public class HighScore extends Activity {
             }
         });
 
-//        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
-//
-//        bottomNavigationView.setSelectedItemId(R.id.action_score);
-//
-//        //nhấp chuột vào 3 icon ở dưới cùng
-//        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                switch(item.getItemId()){
-//
-//                    case R.id.action_home:
-//                        startActivity(new Intent(getApplicationContext()
-//                                ,MainActivity.class));
-//                        overridePendingTransition(0,0);
-//                        return true;
-//
-//                    case R.id.action_score:
-//                        return true;
-//
-//                    case R.id.action_user:
-//                        startActivity(new Intent(getApplicationContext()
-//                                ,User.class));
-//                        overridePendingTransition(0,0);
-//                        return true;
-//
-//                }
-//                return false;
-//            }
-//        });
+
+
+        //cau hinh listview
+        final ArrayList<String> mang = new ArrayList<>();
+        final ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(),
+                android.R.layout.simple_list_item_1,
+                mang);
+        listScore.setAdapter(adapter);
+
+        // Bat su kien
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                mang.clear(); // Xóa danh sách cũ trước khi cập nhật mới
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    if (snapshot.hasChild("name") && snapshot.hasChild("score")) {
+                        String name = snapshot.child("name").getValue().toString();
+                        String score = snapshot.child("score").getValue().toString();
+                        String item = name + ": " + score;
+                        mang.add(item);
+                    }
+                }
+
+//                // Sắp xếp danh sách theo điểm số
+                Collections.sort(mang, new Comparator<String>() {
+                    @Override
+                    public int compare(String s1, String s2) {
+                        // Sắp xếp theo điểm số giảm dần
+                        int score1 = Integer.parseInt(s1.split(":")[1].trim());
+                        int score2 = Integer.parseInt(s2.split(":")[1].trim());
+                        return Integer.compare(score2, score1);
+                    }
+                });
+
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
+
+    }
+
+
+    public void Anhxa(){
+        listScore = (ListView)  findViewById(R.id.listView);
     }
 }

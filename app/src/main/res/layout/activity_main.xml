@@ -177,6 +177,7 @@
                 android:background="@color/salmon"
                 android:text="Profile"
                 android:textSize="25dp" />
+
         </LinearLayout>
 
     </LinearLayout>

@@ -112,6 +112,8 @@ public class MainActivity extends Activity {
             }
         });
 
+
+
         user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
