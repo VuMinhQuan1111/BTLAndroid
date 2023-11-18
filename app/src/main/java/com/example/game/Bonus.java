@@ -1,5 +1,7 @@
+
 package com.example.game;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -20,13 +22,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class Bonus extends AppCompatActivity {
+public class Bonus extends Activity {
     private int score = 0;
     private int scoreBonus = 0;
     private TextView txtScore;
     private TextView txtScoreBonus;
     private Button btnNhanThuong;
-    boolean check = false;
+    private boolean check = false;
     private TextView back;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -40,12 +42,12 @@ public class Bonus extends AppCompatActivity {
         setContentView(R.layout.bonus);
         txtScore = findViewById(R.id.txtScore);
         txtScoreBonus = findViewById(R.id.txtScoreBonus);
-        back = findViewById(R.id.btnBack);
+        back = findViewById(R.id.txtBack);
         btnNhanThuong = findViewById(R.id.btnNhanThuong);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Bonus.this, MainActivity.class);
+                Intent intent = new Intent(Bonus.this, HighScore.class);
                 startActivity(intent);
             }
         });
@@ -62,10 +64,12 @@ public class Bonus extends AppCompatActivity {
                             score = userScore.score;
                             txtScore.setText("Điểm hiện tại: " + score);
                             check = true;
-                            if(score>=10){
+                            if(score>=0){
                                 scoreBonus += 5;
                                 txtScoreBonus.setText("Điểm thưởng: "+scoreBonus);
+
                             }
+                            break;
                         } else {
                             check = false;
                         }
@@ -86,40 +90,38 @@ public class Bonus extends AppCompatActivity {
         btnNhanThuong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                score += scoreBonus;
-
-
-            }
-
-        });
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    for (DataSnapshot snapshott : snapshot.getChildren()) {
-                        ScoreUser usersc = snapshott.getValue(ScoreUser.class);
-                        if(usersc.idus.equals(firebaseUser.getUid())){
-                            if(score>usersc.score){
-                                usersc.setScore(score);
-                                // Thực hiện cập nhật
-                                myRef.child(snapshott.getKey()).setValue(usersc);
+                score = score+scoreBonus;
+                myRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.exists()){
+                            for (DataSnapshot snapshott : snapshot.getChildren()) {
+                                ScoreUser usersc = snapshott.getValue(ScoreUser.class);
+                                if(usersc.idus.equals(firebaseUser.getUid())){
+                                    if(score>usersc.score){
+                                        usersc.setScore(score);
+                                        // Thực hiện cập nhật
+                                        myRef.child(snapshott.getKey()).setValue(usersc);
+                                    }
+                                    check=true;
+                                    break;
+                                }
+                                else{
+                                    check=false;
+                                }
                             }
-                            check=true;
-                            break;
                         }
-                        else{
-                            check=false;
-                        }
+
                     }
-                }
 
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
             }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
         });
+
 
     }
 }

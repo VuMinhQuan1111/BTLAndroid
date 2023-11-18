@@ -24,7 +24,7 @@
             android:textSize="30dp" />
 
         <TextView
-            android:id="@+id/btnBack"
+            android:id="@+id/txtBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
@@ -44,13 +44,15 @@
             android:layout_height="50dp"
             android:layout_marginStart="150dp"
             android:layout_marginTop="150dp"
+            android:text="Điểm hiện tại: "
            />
         <TextView
             android:id="@+id/txtScoreBonus"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_marginStart="150dp"
-            android:layout_below="@+id/txtScore"/>
+            android:layout_below="@+id/txtScore"
+            android:text="Điểm thưởng: "/>
         <Button
             android:id="@+id/btnNhanThuong"
             android:layout_width="100dp"
