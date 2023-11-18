@@ -40,7 +40,7 @@ public class Bonus extends AppCompatActivity {
         setContentView(R.layout.bonus);
         txtScore = findViewById(R.id.txtScore);
         txtScoreBonus = findViewById(R.id.txtScoreBonus);
-        back = findViewById(R.id.back_btn);
+        back = findViewById(R.id.btnBack);
         btnNhanThuong = findViewById(R.id.btnNhanThuong);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,7 +49,6 @@ public class Bonus extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
 
 
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -63,8 +62,7 @@ public class Bonus extends AppCompatActivity {
                             score = userScore.score;
                             txtScore.setText("Điểm hiện tại: " + score);
                             check = true;
-
-                            if(score>=0){
+                            if(score>=10){
                                 scoreBonus += 5;
                                 txtScoreBonus.setText("Điểm thưởng: "+scoreBonus);
                             }
@@ -82,41 +80,46 @@ public class Bonus extends AppCompatActivity {
             }
         });
 
+
+
+
         btnNhanThuong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 score += scoreBonus;
-               myRef.addValueEventListener(new ValueEventListener() {
-                   @Override
-                   public void onDataChange(@NonNull DataSnapshot snapshot) {
-                       if(snapshot.exists()){
-                           for (DataSnapshot snapshott : snapshot.getChildren()) {
-                               ScoreUser usersc = snapshott.getValue(ScoreUser.class);
-                               if(usersc.idus.equals(firebaseUser.getUid())){
-                                   if(score>usersc.score){
-                                       usersc.setScore(score);
-                                       // Thực hiện cập nhật
-                                       myRef.child(snapshott.getKey()).setValue(usersc);
-                                   }
-                                   check=true;
-                                   break;
-                               }
-                               else{
-                                   check=false;
-                               }
-                           }
-                       }
 
-                   }
-
-                   @Override
-                   public void onCancelled(@NonNull DatabaseError error) {
-
-                   }
-               });
 
             }
 
         });
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    for (DataSnapshot snapshott : snapshot.getChildren()) {
+                        ScoreUser usersc = snapshott.getValue(ScoreUser.class);
+                        if(usersc.idus.equals(firebaseUser.getUid())){
+                            if(score>usersc.score){
+                                usersc.setScore(score);
+                                // Thực hiện cập nhật
+                                myRef.child(snapshott.getKey()).setValue(usersc);
+                            }
+                            check=true;
+                            break;
+                        }
+                        else{
+                            check=false;
+                        }
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 }
