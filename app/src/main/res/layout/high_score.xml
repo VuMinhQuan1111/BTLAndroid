@@ -51,15 +51,18 @@
 
                 <ListView
                     android:id="@+id/listView"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="500dp"
+                    android:layout_gravity="center"
                     />
                 <Button
                     android:id="@+id/btnBonus"
-                    android:layout_width="100dp"
-                    android:layout_height="50dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginStart="50dp"
+                    android:layout_gravity="center"
                     android:text="Bonus"
+
                     />
 
 

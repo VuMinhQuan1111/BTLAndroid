@@ -26,7 +26,6 @@ public class HighScore extends Activity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("Score");
 
-
     ListView listScore;
     private TextView back;
     private Button bonus;
@@ -46,7 +45,6 @@ public class HighScore extends Activity {
             }
         });
 
-
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,40 +53,44 @@ public class HighScore extends Activity {
             }
         });
 
-
-
-
-        //cau hinh listview
+        // Cấu hình listview
         final ArrayList<String> mang = new ArrayList<>();
         final ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(),
                 android.R.layout.simple_list_item_1,
                 mang);
         listScore.setAdapter(adapter);
 
-        // Bat su kien
+        // Bắt sự kiện
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                mang.clear(); // Xóa danh sách cũ trước khi cập nhật mới
+                mang.clear(); // Clear the old list before updating
+
+                ArrayList<String> tempList = new ArrayList<>(); // Temporary list for sorting
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     if (snapshot.hasChild("name") && snapshot.hasChild("score")) {
                         String name = snapshot.child("name").getValue().toString();
                         String score = snapshot.child("score").getValue().toString();
-                        String item = name + ": " + score;
-                        mang.add(item);
+                        String item = name + " - " + score;
+                        tempList.add(item);
                     }
                 }
 
-//                // Sắp xếp danh sách theo điểm số
-                Collections.sort(mang, new Comparator<String>() {
+                // Sort the temporary list based on scores
+                Collections.sort(tempList, new Comparator<String>() {
                     @Override
                     public int compare(String s1, String s2) {
-                        // Sắp xếp theo điểm số giảm dần
-                        int score1 = Integer.parseInt(s1.split(":")[1].trim());
-                        int score2 = Integer.parseInt(s2.split(":")[1].trim());
+                        int score1 = Integer.parseInt(s1.split(" - ")[1].trim());
+                        int score2 = Integer.parseInt(s2.split(" - ")[1].trim());
                         return Integer.compare(score2, score1);
                     }
                 });
+
+                // Populate the final list with sorted items and display the rank
+                for (int i = 0; i < tempList.size(); i++) {
+                    String item = (i + 1) + ": " + tempList.get(i);
+                    mang.add(item);
+                }
 
                 adapter.notifyDataSetChanged();
             }
@@ -98,11 +100,9 @@ public class HighScore extends Activity {
             }
         });
 
-
     }
 
-
-    public void Anhxa(){
-        listScore = (ListView)  findViewById(R.id.listView);
+    public void Anhxa() {
+        listScore = findViewById(R.id.listView);
     }
 }
