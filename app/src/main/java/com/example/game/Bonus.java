@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,6 +31,7 @@ public class Bonus extends Activity {
     private Button btnNhanThuong;
     private boolean check = false;
     private TextView back;
+
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("Score");
@@ -102,13 +104,16 @@ public class Bonus extends Activity {
                                         usersc.setScore(score);
                                         // Thực hiện cập nhật
                                         myRef.child(snapshott.getKey()).setValue(usersc);
+                                        txtScore.setText("Điểm hiện tại: " + score);
                                     }
                                     check=true;
                                     break;
+
                                 }
                                 else{
                                     check=false;
                                 }
+
                             }
                         }
 
@@ -118,10 +123,15 @@ public class Bonus extends Activity {
                     public void onCancelled(@NonNull DatabaseError error) {
                     }
                 });
+                thongBaoNhanThanhCong("Nhận điểm thưởng thành công!");
             }
 
         });
 
 
+    }
+    // Hàm hiển thị Toast
+    private void thongBaoNhanThanhCong( String message) {
+        Toast.makeText(Bonus.this, message, Toast.LENGTH_SHORT).show();
     }
 }
