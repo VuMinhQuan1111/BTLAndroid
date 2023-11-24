@@ -3,7 +3,9 @@ package com.example.game;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -39,6 +41,7 @@ public class Bonus extends Activity {
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +50,7 @@ public class Bonus extends Activity {
         txtScoreBonus = findViewById(R.id.txtScoreBonus);
         back = findViewById(R.id.txtBack);
         btnNhanThuong = findViewById(R.id.btnNhanThuong);
+
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,35 +60,49 @@ public class Bonus extends Activity {
         });
 
 
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                        ScoreUser userScore = dataSnapshot.getValue(ScoreUser.class);
-                        if (userScore.idus.equals(firebaseUser.getUid())) {
-                            // Lấy điểm từ Firebase và hiển thị trên TextView
-                            score = userScore.score;
-                            txtScore.setText("Điểm hiện tại: "+score);
-                            check = true;
-                            if(score>=0){
-                                scoreBonus += 5;
-                                txtScoreBonus.setText("Điểm thưởng: "+scoreBonus);
+            myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                            ScoreUser userScore = dataSnapshot.getValue(ScoreUser.class);
+                            if (userScore.idus.equals(firebaseUser.getUid())) {
+                                // Lấy điểm từ Firebase và hiển thị trên TextView
+                                score = userScore.score;
+                                txtScore.setText("Điểm hiện tại: " + score);
+                                check = true;
+                                if (score >= 100 && score<300) {
+                                    scoreBonus += 5;
+                                    txtScoreBonus.setText("Điểm thưởng: " + scoreBonus);
+                                    btnNhanThuong.setVisibility(View.VISIBLE); // Hiển thị nút nhận
+                                }
+                                else if (score>=300 && score <1000){
+                                    scoreBonus+=10;
+                                    txtScoreBonus.setText("Điểm thưởng: " + scoreBonus);
+
+                                }
+                                else if (score >= 1000){
+                                    scoreBonus += 50;
+                                    txtScoreBonus.setText("Điểm thưởng: " + scoreBonus);
+                                }else {
+                                    btnNhanThuong.setVisibility(View.GONE);
+                                    txtScoreBonus.setVisibility(View.GONE);
+                                 }
+                                break;
+                            } else {
+                                check = false;
                             }
-                            break;
-                        } else {
-                            check = false;
                         }
                     }
+
                 }
 
-            }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                }
+            });
 
-            }
-        });
 
 
 
@@ -108,10 +126,14 @@ public class Bonus extends Activity {
                                             txtScore.setText("Điểm hiện tại: "+ score);
                                         }
                                         check = true;
+                                        // Ẩn nút và điểm thưởng sau khi nhận thành công
+                                        btnNhanThuong.setVisibility(View.GONE);
+                                        txtScoreBonus.setVisibility(View.GONE);
+
                                         if (check) {
                                             danhan = true;
-                                            btnNhanThuong.setVisibility(View.GONE); // Ẩn nút nhận
                                             thongBaoNhanThanhCong("Nhận điểm thưởng thành công!");
+
                                         }
                                         break;
 
@@ -138,8 +160,10 @@ public class Bonus extends Activity {
 
 
     }
+
     // Hàm hiển thị Toast
     private void thongBaoNhanThanhCong( String message) {
         Toast.makeText(Bonus.this, message, Toast.LENGTH_SHORT).show();
     }
+
 }

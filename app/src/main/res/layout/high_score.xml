@@ -55,9 +55,6 @@
                     android:layout_height="500dp"
                     android:layout_gravity="center"
                     />
-
-
-
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>

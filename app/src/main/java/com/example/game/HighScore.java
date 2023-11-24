@@ -65,7 +65,7 @@ public class HighScore extends Activity {
                     if (snapshot.hasChild("name") && snapshot.hasChild("score")) {
                         String name = snapshot.child("name").getValue().toString();
                         String score = snapshot.child("score").getValue().toString();
-                        String item = name + " - " + score;
+                        String item = name + " : " + score;
                         tempList.add(item);
                     }
                 }
@@ -74,15 +74,15 @@ public class HighScore extends Activity {
                 Collections.sort(tempList, new Comparator<String>() {
                     @Override
                     public int compare(String s1, String s2) {
-                        int score1 = Integer.parseInt(s1.split(" - ")[1].trim());
-                        int score2 = Integer.parseInt(s2.split(" - ")[1].trim());
+                        int score1 = Integer.parseInt(s1.split(" : ")[1].trim());
+                        int score2 = Integer.parseInt(s2.split(" : ")[1].trim());
                         return Integer.compare(score2, score1);
                     }
                 });
 
                 // Populate the final list with sorted items and display the rank
                 for (int i = 0; i < tempList.size(); i++) {
-                    String item = (i + 1) + ": " + tempList.get(i);
+                    String item = (i + 1) + ". " + tempList.get(i);
                     mang.add(item);
                 }
 
