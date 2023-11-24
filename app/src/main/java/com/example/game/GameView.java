@@ -352,27 +352,27 @@ public class GameView extends SurfaceView implements Runnable {
 
     }
 
-//    private void waitBeforeExiting() {
-//
-//        try {
-//            Thread.sleep(3000);
-//            activity.startActivity(new Intent(activity, MainActivity.class));
-//            activity.finish();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
-private void waitBeforeExiting() {
-    try {
-        Thread.sleep(3000);
-        Intent intent = new Intent(activity, Bonus.class);
-        activity.startActivity(intent);
-        activity.finish();
-    } catch (InterruptedException e) {
-        e.printStackTrace();
+    private void waitBeforeExiting() {
+
+        try {
+            Thread.sleep(3000);
+            activity.startActivity(new Intent(activity, MainActivity.class));
+            activity.finish();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
     }
-}
+//private void waitBeforeExiting() {
+//    try {
+//        Thread.sleep(3000);
+//        Intent intent = new Intent(activity, Bonus.class);
+//        activity.startActivity(intent);
+//        activity.finish();
+//    } catch (InterruptedException e) {
+//        e.printStackTrace();
+//    }
+//}
 
 
     private void sleep () {

@@ -31,6 +31,7 @@ public class Bonus extends Activity {
     private Button btnNhanThuong;
     private boolean check = false;
     private TextView back;
+    private boolean danhan = false;
 
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -49,7 +50,7 @@ public class Bonus extends Activity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Bonus.this, HighScore.class);
+                Intent intent = new Intent(Bonus.this, MainActivity.class);
                 startActivity(intent);
             }
         });
@@ -64,12 +65,11 @@ public class Bonus extends Activity {
                         if (userScore.idus.equals(firebaseUser.getUid())) {
                             // Lấy điểm từ Firebase và hiển thị trên TextView
                             score = userScore.score;
-                            txtScore.setText("Điểm hiện tại: " + score);
+                            txtScore.setText("Điểm hiện tại: "+score);
                             check = true;
                             if(score>=0){
                                 scoreBonus += 5;
                                 txtScoreBonus.setText("Điểm thưởng: "+scoreBonus);
-
                             }
                             break;
                         } else {
@@ -92,38 +92,46 @@ public class Bonus extends Activity {
         btnNhanThuong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                score = score+scoreBonus;
-                myRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(snapshot.exists()){
-                            for (DataSnapshot snapshott : snapshot.getChildren()) {
-                                ScoreUser usersc = snapshott.getValue(ScoreUser.class);
-                                if(usersc.idus.equals(firebaseUser.getUid())){
-                                    if(score>usersc.score){
-                                        usersc.setScore(score);
-                                        // Thực hiện cập nhật
-                                        myRef.child(snapshott.getKey()).setValue(usersc);
-                                        txtScore.setText("Điểm hiện tại: " + score);
-                                    }
-                                    check=true;
-                                    break;
+                if (!danhan) {
+                    score = score + scoreBonus;
+                    myRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.exists()) {
+                                for (DataSnapshot snapshott : snapshot.getChildren()) {
+                                    ScoreUser usersc = snapshott.getValue(ScoreUser.class);
+                                    if (usersc.idus.equals(firebaseUser.getUid())) {
+                                        if (score > usersc.score) {
+                                            usersc.setScore(score);
+                                            // Thực hiện cập nhật
+                                            myRef.child(snapshott.getKey()).setValue(usersc);
+                                            txtScore.setText("Điểm hiện tại: "+ score);
+                                        }
+                                        check = true;
+                                        if (check) {
+                                            danhan = true;
+                                            btnNhanThuong.setVisibility(View.GONE); // Ẩn nút nhận
+                                            thongBaoNhanThanhCong("Nhận điểm thưởng thành công!");
+                                        }
+                                        break;
 
-                                }
-                                else{
-                                    check=false;
+                                    } else {
+                                        check = false;
+                                    }
+
                                 }
 
                             }
+
+
                         }
 
-                    }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                        }
+                    });
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                    }
-                });
-                thongBaoNhanThanhCong("Nhận điểm thưởng thành công!");
+                }
             }
 
         });

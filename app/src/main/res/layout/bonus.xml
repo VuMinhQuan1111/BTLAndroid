@@ -38,29 +38,34 @@
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
     <RelativeLayout
+        android:layout_marginTop="150dp"
         android:layout_below="@+id/top"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <TextView
             android:id="@+id/txtScore"
-            android:layout_width="100dp"
+            android:layout_width="200dp"
             android:layout_height="50dp"
             android:layout_marginStart="150dp"
-            android:text="Điểm hiện tại: "
-           />
+            android:textColor="@color/black"
+            android:textStyle="bold"/>
         <TextView
             android:id="@+id/txtScoreBonus"
-            android:layout_width="100dp"
+            android:layout_width="200dp"
             android:layout_height="50dp"
             android:layout_marginStart="150dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
             android:layout_below="@+id/txtScore"
-            android:text="Điểm thưởng: "/>
+           />
         <Button
             android:id="@+id/btnNhanThuong"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_marginStart="150dp"
             android:text="Nhận"
+            android:background="@color/salmon"
             android:layout_below="@+id/txtScoreBonus"/>
     </RelativeLayout>
 </RelativeLayout>

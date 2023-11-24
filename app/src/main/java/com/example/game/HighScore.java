@@ -28,7 +28,7 @@ public class HighScore extends Activity {
 
     ListView listScore;
     private TextView back;
-    private Button bonus;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,14 +36,8 @@ public class HighScore extends Activity {
         setContentView(R.layout.high_score);
         Anhxa();
         back = findViewById(R.id.back_btn);
-        bonus = findViewById(R.id.btnBonus);
-        bonus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(HighScore.this, Bonus.class);
-                startActivity(intent);
-            }
-        });
+
+
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
