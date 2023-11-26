@@ -13,37 +13,41 @@
         android:theme="@style/Theme.Game"
         tools:targetApi="34">
         <activity
-            android:screenOrientation="landscape"
             android:name=".SplashScreen"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:screenOrientation="landscape"
-            android:name=".SignIn" />
+            android:name=".SignIn"
+            android:screenOrientation="landscape" />
         <activity
-            android:screenOrientation="landscape"
-            android:name=".SignUp" />
+            android:name=".SignUp"
+            android:screenOrientation="landscape" />
         <activity
-            android:screenOrientation="landscape"
-            android:name=".MainActivity" />
+            android:name=".MainActivity"
+            android:screenOrientation="landscape" />
         <activity
-            android:screenOrientation="landscape"
             android:name=".HighScore"
-            />
+            android:screenOrientation="landscape" />
         <activity
-            android:screenOrientation="landscape"
-            android:name=".Bonus"/>
+            android:name=".Bonus"
+            android:screenOrientation="landscape" />
         <activity
-            android:screenOrientation="landscape"
-            android:name=".User"/>
+            android:name=".User"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".GameActivity"
             android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".credit"
+            android:exported="false"
             android:screenOrientation="landscape"/>
-
     </application>
+
 </manifest>

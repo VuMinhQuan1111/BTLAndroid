@@ -25,7 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends Activity {
 
-    private Button highscore, user, play,medal;
+    private Button highscore, user, play,medal, cre;
     private boolean isMute;
 
     private TextView score,username;
@@ -47,6 +47,7 @@ public class MainActivity extends Activity {
         score=findViewById(R.id.textViewscore);
         username=findViewById(R.id.ussername);
         medal = findViewById(R.id.medal);
+        cre = findViewById(R.id.credit);
 
         final SharedPreferences prefs = getSharedPreferences("game", MODE_PRIVATE);
         isMute = prefs.getBoolean("isMute", false);
@@ -164,6 +165,14 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, GameActivity.class));
+            }
+        });
+
+        cre.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, credit.class));
             }
         });
 
