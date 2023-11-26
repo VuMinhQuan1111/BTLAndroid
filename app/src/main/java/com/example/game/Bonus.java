@@ -71,15 +71,15 @@ public class Bonus extends Activity {
                                 score = userScore.score;
                                 txtScore.setText("Điểm hiện tại: " + score);
                                 check = true;
-                                if (score >= 30 && score<70) {
+                                if (score >= 10 && score<70) {
                                     scoreBonus += 5;
                                     txtScoreBonus.setText("Điểm thưởng: " + scoreBonus);
                                 }
-                                else if (score>=70 && score <1000){
+                                else if (score>=30 && score <1000){
                                     scoreBonus+=10;
                                     txtScoreBonus.setText("Điểm thưởng: " + scoreBonus);
                                 }
-                                else if (score >= 1000){
+                                else if (score >= 100){
                                     scoreBonus += 50;
                                     txtScoreBonus.setText("Điểm thưởng: " + scoreBonus);
                                 }else {

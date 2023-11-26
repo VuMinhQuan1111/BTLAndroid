@@ -42,16 +42,16 @@ public class SignIn extends AppCompatActivity {
         forgot = findViewById(R.id.forgot_password);
         SignUp = findViewById(R.id.SignUp);
 
-        check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(check.isChecked()){
-                    edtpassword.setTransformationMethod(null);
-                }else{
-                    edtpassword.setTransformationMethod(new PasswordTransformationMethod());
-                }
-            }
-        });
+//        check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+//                if(check.isChecked()){
+//                    edtpassword.setTransformationMethod(null);
+//                }else{
+//                    edtpassword.setTransformationMethod(new PasswordTransformationMethod());
+//                }
+//            }
+//        });
 
 
         //Bấm vào trang đăng ký
@@ -107,7 +107,7 @@ public class SignIn extends AppCompatActivity {
                             //progressDialog.dismiss();
                             Intent intent = new Intent(SignIn.this, MainActivity.class);
                             startActivity(intent);
-                            //finishAffinity();
+                            finishAffinity();
 
                         } else {
 

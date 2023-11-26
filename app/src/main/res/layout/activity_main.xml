@@ -186,27 +186,28 @@
                 android:textSize="25dp" />
 
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="300dp"
-            android:layout_height="100dp"
-            android:layout_gravity="center"
-            android:orientation="horizontal">
+        <!--Dem so lan choi-->
+<!--        <LinearLayout-->
+<!--            android:layout_width="300dp"-->
+<!--            android:layout_height="100dp"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:orientation="horizontal">-->
 
-            <!--nut đếm số lần chơi game-->
-            <Button
-                android:id="@+id/btnDemSoLanDaChoi"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:text="Đếm số lần đã chơi"
-                android:background="@color/salmon" />
+<!--            &lt;!&ndash;nut đếm số lần chơi game&ndash;&gt;-->
+<!--            <Button-->
+<!--                android:id="@+id/btnDemSoLanDaChoi"-->
+<!--                android:layout_width="100dp"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:text="Đếm số lần đã chơi"-->
+<!--                android:background="@color/salmon" />-->
 
-            <TextView
-                android:id="@+id/txtSoLanChoi"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-               />
+<!--            <TextView-->
+<!--                android:id="@+id/txtSoLanChoi"-->
+<!--                android:layout_width="100dp"-->
+<!--                android:layout_height="100dp"-->
+<!--               />-->
 
-        </LinearLayout>
+<!--        </LinearLayout>-->
 
     </LinearLayout>
 

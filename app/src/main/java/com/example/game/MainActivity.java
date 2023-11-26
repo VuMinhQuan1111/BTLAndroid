@@ -61,9 +61,9 @@ public class MainActivity extends Activity {
         cre = findViewById(R.id.credit);
 
         //nut dem so lan da choi
-        btnDemSoLanDaChoi = findViewById(R.id.btnDemSoLanDaChoi);
-        //text hiển thị số lần chơi
-        SoLanChoi = findViewById(R.id.txtSoLanChoi);
+//        btnDemSoLanDaChoi = findViewById(R.id.btnDemSoLanDaChoi);
+//        //text hiển thị số lần chơi
+//        SoLanChoi = findViewById(R.id.txtSoLanChoi);
 
 
         final SharedPreferences prefs = getSharedPreferences("game", MODE_PRIVATE);
@@ -165,10 +165,10 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View view) {
                 // Khi nhấn nút play, tăng số lần chơi lên 1 và cập nhật vào SharedPreferences
-                int soLanChoi = prefs.getInt("soLanChoi", 0) + 1;
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putInt("soLanChoi", soLanChoi);
-                editor.apply();
+//                int soLanChoi = prefs.getInt("soLanChoi", 0) + 1;
+//                SharedPreferences.Editor editor = prefs.edit();
+//                editor.putInt("soLanChoi", soLanChoi);
+//                editor.apply();
 
                 startActivity(new Intent(MainActivity.this, GameActivity.class));
             }

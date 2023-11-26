@@ -56,26 +56,26 @@ public class HighScore extends Activity {
         Anhxa();
         back = findViewById(R.id.back_btn);
         //nut tim kiem
-        btnTimKiemTheoTen = findViewById(R.id.btnTimKiemTheoTen);
-        btnTimKiemTheoDiemChinhXac = findViewById(R.id.btnTimKiemTheoDiemChinhXac);
-        btnTimKiemTheoKhoangDiem = findViewById(R.id.btnTimKiemTheoKhoangDiem);
-
-        //nut sap xep
-        btnSapXepNguoiChoiTheoTenAZ = findViewById(R.id.btnSapXepNguoiChoiTheoTenAZ);
-        btnSapXepNguoiChoiTheoTenZA = findViewById(R.id.btnSapXepNguoiChoiTheoTenZA);
-
-        //nút top 5
-        btnTop5NguoiChoiDiemCaoNhat = findViewById(R.id.btnTop5NguoiChoiDiemCaoNhat);
-        btnTop5NguoiChoiCoDiemThapNhat = findViewById(R.id.btnTop5NguoiChoiDiemThapNhat);
-
-        //nut top 1
-        btnNguoiChoiDiemCaoNhat = findViewById(R.id.btnNguoiChoiCaoDiemNhat);
-        btnNguoiChoiDiemThapNhat = findViewById(R.id.btnNguoiChoiThapDiemNhat);
-        //edit text
-        editTextTimKiemTheoTen = findViewById(R.id.editTextTimKiemTheoTen);
-        editTextTimKiemTheoDiemChinhXac = findViewById(R.id.editTextTimkiemTheoDiemChinhXac);
-        editTextDiemTu = findViewById(R.id.editTextDiemTu);
-        editTextDiemDen = findViewById(R.id.editTextDiemDen);
+//        btnTimKiemTheoTen = findViewById(R.id.btnTimKiemTheoTen);
+//        btnTimKiemTheoDiemChinhXac = findViewById(R.id.btnTimKiemTheoDiemChinhXac);
+//        btnTimKiemTheoKhoangDiem = findViewById(R.id.btnTimKiemTheoKhoangDiem);
+//
+//        //nut sap xep
+//        btnSapXepNguoiChoiTheoTenAZ = findViewById(R.id.btnSapXepNguoiChoiTheoTenAZ);
+//        btnSapXepNguoiChoiTheoTenZA = findViewById(R.id.btnSapXepNguoiChoiTheoTenZA);
+//
+//        //nút top 5
+//        btnTop5NguoiChoiDiemCaoNhat = findViewById(R.id.btnTop5NguoiChoiDiemCaoNhat);
+//        btnTop5NguoiChoiCoDiemThapNhat = findViewById(R.id.btnTop5NguoiChoiDiemThapNhat);
+//
+//        //nut top 1
+//        btnNguoiChoiDiemCaoNhat = findViewById(R.id.btnNguoiChoiCaoDiemNhat);
+//        btnNguoiChoiDiemThapNhat = findViewById(R.id.btnNguoiChoiThapDiemNhat);
+//        //edit text
+//        editTextTimKiemTheoTen = findViewById(R.id.editTextTimKiemTheoTen);
+//        editTextTimKiemTheoDiemChinhXac = findViewById(R.id.editTextTimkiemTheoDiemChinhXac);
+//        editTextDiemTu = findViewById(R.id.editTextDiemTu);
+//        editTextDiemDen = findViewById(R.id.editTextDiemDen);
 
         //nut sap xep diem
         btnSapXepDiemCaoThap = findViewById(R.id.btnSapXepTheoDiemCaoThap) ;

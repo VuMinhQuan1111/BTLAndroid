@@ -99,16 +99,16 @@
                     android:gravity="center"
                     android:text="Gmail"
                     android:textSize="35dp"
-                    android:textColor="#FFFFFF"/>
-                <Button
-                    android:id="@+id/gio_hang"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_margin="8dp"
-                    android:layout_marginTop="10dp"
-                    android:text="Edit Profile"
-                    android:textSize="25dp"
-                    android:background="@color/salmon"/>
+                    android:textColor="@color/black"/>
+<!--                <Button-->
+<!--                    android:id="@+id/gio_hang"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="50dp"-->
+<!--                    android:layout_margin="8dp"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:text="Edit Profile"-->
+<!--                    android:textSize="25dp"-->
+<!--                    android:background="@color/salmon"/>-->
 
 <!--                        <Button-->
 <!--                            android:id="@+id/love"-->

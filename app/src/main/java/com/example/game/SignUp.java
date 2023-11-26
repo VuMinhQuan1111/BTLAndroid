@@ -36,7 +36,7 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up);
 
-        check = findViewById(R.id.hienmk);
+        //check = findViewById(R.id.hienmk);
         edtgmail = findViewById(R.id.GmailSU);
         edtpassword = findViewById(R.id.PasswordSU);
         edtname=findViewById(R.id.Nameus);
@@ -44,16 +44,16 @@ public class SignUp extends AppCompatActivity {
         btnsignup = findViewById(R.id.SignUp);
         layoutSignin = findViewById(R.id.layout_signin);
 
-        check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(check.isChecked()){
-                    edtpassword.setTransformationMethod(null);
-                }else{
-                    edtpassword.setTransformationMethod(new PasswordTransformationMethod());
-                }
-            }
-        });
+//        check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+//                if(check.isChecked()){
+//                    edtpassword.setTransformationMethod(null);
+//                }else{
+//                    edtpassword.setTransformationMethod(new PasswordTransformationMethod());
+//                }
+//            }
+//        });
         layoutSignin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
