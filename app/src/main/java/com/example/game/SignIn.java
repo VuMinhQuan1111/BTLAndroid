@@ -27,7 +27,7 @@ public class SignIn extends AppCompatActivity {
     private Button btnsignin, SignUp;
     //private ProgressDialog progressDialog ;
     private LinearLayout forgot;
-    private CheckBox check;
+    //private CheckBox check;
 
 
     @Override
@@ -35,7 +35,7 @@ public class SignIn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_in);
 
-        check = findViewById(R.id.hienmk);
+        //check = findViewById(R.id.hienmk);
         edtgmail = findViewById(R.id.edit_gmail);
         edtpassword = findViewById(R.id.edit_password);
         btnsignin = findViewById(R.id.SignIn);

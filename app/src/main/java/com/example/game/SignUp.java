@@ -93,8 +93,8 @@ public class SignUp extends AppCompatActivity {
 //                }
                 else
                 {
-                    //onClickSignUp();
-                    Toast.makeText(SignUp.this,"Thành công",Toast.LENGTH_LONG).show();
+                    onClickSignUp();
+                    //Toast.makeText(SignUp.this,"Thành công",Toast.LENGTH_LONG).show();
                 }
 //                boolean check = validateInfo(name, gmail, password);
 //                if(check == true){

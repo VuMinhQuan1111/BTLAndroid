@@ -78,8 +78,8 @@ public class HighScore extends Activity {
 //        editTextDiemDen = findViewById(R.id.editTextDiemDen);
 
         //nut sap xep diem
-        btnSapXepDiemCaoThap = findViewById(R.id.btnSapXepTheoDiemCaoThap) ;
-        btnSapXepDiemThapCao = findViewById(R.id.btnSapXepTheoDiemThapCao);
+//        btnSapXepDiemCaoThap = findViewById(R.id.btnSapXepTheoDiemCaoThap) ;
+//        btnSapXepDiemThapCao = findViewById(R.id.btnSapXepTheoDiemThapCao);
 
 
 
