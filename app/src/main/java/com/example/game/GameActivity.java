@@ -28,7 +28,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
         if (sensorManager != null) {
-            accelerometerSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+            accelerometerSensor = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
             lightSensor =sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
         }
 
@@ -73,7 +73,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     @Override
     public void onSensorChanged(SensorEvent event) {
 
-        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+        if (event.sensor.getType() == Sensor.TYPE_GYROSCOPE) {
             float valuez=event.values[2];
             float valuex=event.values[1];
             if (valuez > 0.5f || valuex > 0) {
