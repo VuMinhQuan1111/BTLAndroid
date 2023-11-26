@@ -162,14 +162,17 @@ public class GameView extends SurfaceView implements Runnable {
             return;
         }*/
 
+        // Căn chỉnh nút bắn 1 sao cho vừa khung hình của gameView
         control1.x = screenX/7;
-        control1.y=screenY/5*4-control1.height;
+        control1.y=screenY/5*4-control1.height; // screenY/
 
+        // Căn chỉnh nút bắn 2 sao cho vừa khung hình của gameView
         control2.x=screenX/7*6-control1.width;
         control2.y=screenY/5*4-control2.height;
 
-        background1.x -= 10 * screenRatioX;
-        background2.x -= 10 * screenRatioX;
+        // Background Di chuyển
+        background1.x -= 30 * screenRatioX;
+        background2.x -= 30 * screenRatioX;
 
         if (background1.x + background1.backgroundgame.getWidth() < 0) {
             background1.x = screenX;
@@ -179,10 +182,11 @@ public class GameView extends SurfaceView implements Runnable {
             background2.x = screenX;
         }
 
+        // Tốc độ của máy bay người chơi
         if (flight.isGoingUp)
-            flight.y -= 30 * screenRatioY;
+            flight.y -= 20 * screenRatioY;
         else
-            flight.y += 30 * screenRatioY;
+            flight.y += 20 * screenRatioY;
 
         if (flight.y < 0)
             flight.y = 0;
@@ -197,6 +201,7 @@ public class GameView extends SurfaceView implements Runnable {
             if (bullet.x > screenX)
                 trash.add(bullet);
 
+            //Tốc độ của đạn
             bullet.x += 50 * screenRatioX;
 
             for (FlightAM fli : flightAM) {

@@ -4,8 +4,11 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -24,6 +27,7 @@ public class SignIn extends AppCompatActivity {
     private Button btnsignin, SignUp;
     //private ProgressDialog progressDialog ;
     private LinearLayout forgot;
+    private CheckBox check;
 
 
     @Override
@@ -31,11 +35,23 @@ public class SignIn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_in);
 
+        check = findViewById(R.id.hienmk);
         edtgmail = findViewById(R.id.edit_gmail);
         edtpassword = findViewById(R.id.edit_password);
         btnsignin = findViewById(R.id.SignIn);
         forgot = findViewById(R.id.forgot_password);
         SignUp = findViewById(R.id.SignUp);
+
+        check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(check.isChecked()){
+                    edtpassword.setTransformationMethod(null);
+                }else{
+                    edtpassword.setTransformationMethod(new PasswordTransformationMethod());
+                }
+            }
+        });
 
 
         //Bấm vào trang đăng ký

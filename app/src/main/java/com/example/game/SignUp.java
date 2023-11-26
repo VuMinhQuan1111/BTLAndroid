@@ -2,12 +2,13 @@ package com.example.game;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,15 +25,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class SignUp extends AppCompatActivity {
 
-    private EditText edtgmail,edtpassword,edtname;;
+    private EditText edtgmail,edtpassword,edtname;
     private EditText fullname,edtpassword2;
     private Button btnsignup;
     private TextView layoutSignin;
+    private CheckBox check;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up);
 
+        check = findViewById(R.id.hienmk);
         edtgmail = findViewById(R.id.GmailSU);
         edtpassword = findViewById(R.id.PasswordSU);
         edtname=findViewById(R.id.Nameus);
@@ -40,6 +43,16 @@ public class SignUp extends AppCompatActivity {
         btnsignup = findViewById(R.id.SignUp);
         layoutSignin = findViewById(R.id.layout_signin);
 
+        check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(check.isChecked()){
+                    edtpassword.setTransformationMethod(null);
+                }else{
+                    edtpassword.setTransformationMethod(new PasswordTransformationMethod());
+                }
+            }
+        });
         layoutSignin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,16 +67,20 @@ public class SignUp extends AppCompatActivity {
         btnsignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (TextUtils.isEmpty(edtgmail.getText().toString()))
-                {
-                    Toast.makeText(SignUp.this,
-                            "không được để trống gmail",
-                            Toast.LENGTH_SHORT).show();
-                }else if(TextUtils.isEmpty(edtpassword.getText().toString())) {
-                    Toast.makeText(SignUp.this,
-                            "không được để trống mật khẩu",
-                            Toast.LENGTH_SHORT).show();
-                }
+                String name = edtname.getText().toString();
+                String gmail = edtgmail.getText().toString();
+                String password = edtpassword.getText().toString();
+//                if (TextUtils.isEmpty(edtgmail.getText().toString()))
+//                {
+//                    Toast.makeText(SignUp.this,
+//                            "không được để trống gmail",
+//                            Toast.LENGTH_SHORT).show();
+//                }else if(TextUtils.isEmpty(edtpassword.getText().toString())) {
+//                    Toast.makeText(SignUp.this,
+//                            "không được để trống mật khẩu",
+//                            Toast.LENGTH_SHORT).show();
+//                }
+
 //                else if(TextUtils.isEmpty(edtpassword2.getText().toString())) {
 //                    Toast.makeText(SignUp.this,
 //                            "không được để trống xác nhận mật khẩu",
@@ -73,14 +90,69 @@ public class SignUp extends AppCompatActivity {
 //                            "Xác nhận mật khẩu phải giống mật khẩu",
 //                            Toast.LENGTH_SHORT).show();
 //                }
-                else
-                {
-                    onClickSignUp();
+//                else
+//                {
+//                    //onClickSignUp();
+//                    Toast.makeText(SignUp.this,"Thành công",Toast.LENGTH_LONG).show();
+//                }
+                boolean check = validateInfo(name, gmail, password);
+                if(check == true){
                     //Toast.makeText(SignUp.this,"Thành công",Toast.LENGTH_LONG).show();
+                    onClickSignUp();
+                }else{
+                    Toast.makeText(SignUp.this,"Đăng nhập thất bại",Toast.LENGTH_LONG).show();
                 }
             }
         });
     }
+
+    private boolean validateInfo(String name, String gmail, String password){
+        if(name.length() == 0){
+            edtname.requestFocus();
+            Toast.makeText(SignUp.this,"Tên không để trống",Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        else if(gmail.length() == 0){
+            edtgmail.requestFocus();
+            Toast.makeText(SignUp.this,"Gmail không để trống",Toast.LENGTH_LONG).show();
+            return false;
+        }
+        else if(!gmail.matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")){
+            edtgmail.requestFocus();
+            Toast.makeText(SignUp.this,"Gmail không hợp lệ",Toast.LENGTH_LONG).show();
+            return false;
+        }else if(password.length() == 0){
+            edtpassword.requestFocus();
+            Toast.makeText(SignUp.this,"Password không để trống",Toast.LENGTH_LONG).show();
+            return false;
+        }else if(!password.matches("(.*[0-9].*)")){
+            edtpassword.requestFocus();
+            Toast.makeText(SignUp.this,"Password cần 1 số",Toast.LENGTH_LONG).show();
+            return false;
+        }
+        else if(!password.matches("(.*[a-z].*)")){
+            edtpassword.requestFocus();
+            Toast.makeText(SignUp.this,"Password cần 1 chữ thường",Toast.LENGTH_LONG).show();
+            return false;
+        }else if(!password.matches("(.*[A-Z].*)")){
+            edtpassword.requestFocus();
+            Toast.makeText(SignUp.this,"Password cần 1 chữ hoa",Toast.LENGTH_LONG).show();
+            return false;
+        }else if(!password.matches("(.*[!@#$%^&*()_+=\\[{\\]};].*)")){
+            edtpassword.requestFocus();
+            Toast.makeText(SignUp.this,"Password cần 1 ký tự đặc biệt",Toast.LENGTH_LONG).show();
+            return false;
+        }
+//        else if(!password.matches("^0\\d{9}$")){
+//            edtpassword.requestFocus();
+//            Toast.makeText(SignUp.this,"Số điện thoại chưa đúng",Toast.LENGTH_LONG).show();
+//            return false;
+//        }
+            return true;
+    }
+
+
     private void onClickSignUp() {
         String strGmail = edtgmail.getText().toString().trim();
         String strPassword = edtpassword.getText().toString().trim();

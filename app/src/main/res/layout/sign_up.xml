@@ -1,112 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:gravity="center"
-    tools:context=".SignIn"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@drawable/login"
-    >
+    android:gravity="center"
+    tools:context=".SignIn">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:layout_marginTop="80dp">
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:ems="11"
-            android:id="@+id/Nameus"
-            android:hint="Name"
-            android:imeOptions="actionNext"
-            android:textSize="28dp"
-            />
+        android:layout_height="wrap_content">
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:ems="11"
-            android:id="@+id/GmailSU"
-            android:inputType="textEmailAddress"
-            android:hint="Gmail"
-            android:imeOptions="actionNext"
-            android:textSize="28dp"
-            >
-        </EditText>
-
-<!--        <EditText-->
-<!--            android:id="@+id/name"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:hint="Nhập họ tên"-->
-<!--            android:textSize="28dp"-->
-<!--            android:ems="11"-->
-<!--            android:layout_marginBottom="10dp">-->
-
-<!--        </EditText>-->
-
-        <EditText
-            android:id="@+id/PasswordSU"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Mật khẩu"
-            android:imeOptions="actionDone"
-            android:textSize="28dp"
-            android:ems="11"
-            android:inputType="textPassword">
-
-        </EditText>
-<!--        <EditText-->
-<!--            android:id="@+id/PasswordSU2"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:hint="Xác nhận mật khẩu"-->
-<!--            android:textSize="28dp"-->
-<!--            android:ems="11"-->
-<!--            android:inputType="textPassword"-->
-<!--            android:layout_marginBottom="12dp"-->
-<!--            android:layout_marginTop="10dp">-->
-
-<!--        </EditText>-->
-
-        <Button
-            android:id="@+id/SignUp"
-            android:layout_width="180dp"
-            android:layout_height="wrap_content"
-            android:text="Đăng Ký"
-            android:textSize="20dp">
-
-        </Button>
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginTop="80dp"
+            android:gravity="center"
+            android:orientation="vertical">
 
-            <TextView
+            <EditText
+                android:id="@+id/Nameus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:text="Nếu đã có mật khẩu?"
-                android:textSize="25dp">
+                android:layout_marginBottom="10dp"
+                android:ems="11"
+                android:hint="Name"
+                android:imeOptions="actionNext"
+                android:textSize="28dp" />
 
-            </TextView>
-
-            <TextView
+            <EditText
+                android:id="@+id/GmailSU"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/layout_signin"
-                android:text="Đăng nhập"
-                android:textColor="#0238F8"
-                android:textSize="25dp">
+                android:layout_marginBottom="10dp"
+                android:ems="11"
+                android:hint="Gmail"
+                android:imeOptions="actionNext"
+                android:inputType="textEmailAddress"
+                android:textSize="28dp"></EditText>
+
+            <!--        <EditText-->
+            <!--            android:id="@+id/name"-->
+            <!--            android:layout_width="wrap_content"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            android:hint="Nhập họ tên"-->
+            <!--            android:textSize="28dp"-->
+            <!--            android:ems="11"-->
+            <!--            android:layout_marginBottom="10dp">-->
+
+            <!--        </EditText>-->
+
+            <EditText
+                android:id="@+id/PasswordSU"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="11"
+                android:hint="Mật khẩu"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:textSize="28dp">
+
+            </EditText>
+            <!--        <EditText-->
+            <!--            android:id="@+id/PasswordSU2"-->
+            <!--            android:layout_width="wrap_content"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            android:hint="Xác nhận mật khẩu"-->
+            <!--            android:textSize="28dp"-->
+            <!--            android:ems="11"-->
+            <!--            android:inputType="textPassword"-->
+            <!--            android:layout_marginBottom="12dp"-->
+            <!--            android:layout_marginTop="10dp">-->
+
+            <!--        </EditText>-->
+
+            <CheckBox
+                android:id="@+id/hienmk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hiện mật khẩu"
+                android:textSize="20dp"
+                android:layout_marginRight="100dp"/>
+
+            <Button
+                android:id="@+id/SignUp"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:text="Đăng Ký"
+                android:textSize="20dp">
+
+            </Button>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:text="Nếu đã có mật khẩu?"
+                    android:textSize="25dp">
+
+                </TextView>
+
+                <TextView
+                    android:id="@+id/layout_signin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Đăng nhập"
+                    android:textColor="#0238F8"
+                    android:textSize="25dp">
 
 
-            </TextView>
+                </TextView>
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-
-</RelativeLayout>
+    </RelativeLayout>
+</ScrollView>
