@@ -6,67 +6,67 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".Bonus"
     android:background="@drawable/login"
-   >
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     >
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/top"
-        android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:background="@color/salmon">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="15dp"
-            android:text="Bonus"
-            android:textSize="30dp" />
-
-        <TextView
-            android:id="@+id/txtBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="20dp"
-            android:text="Back"
-            android:textSize="30dp" />
-
-    </com.google.android.material.bottomnavigation.BottomNavigationView>
     <RelativeLayout
-        android:layout_marginTop="150dp"
-        android:layout_below="@+id/top"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        >
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/top"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:background="@color/salmon">
 
-        <TextView
-            android:id="@+id/txtScore"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="150dp"
-            android:textColor="@color/black"
-            android:textStyle="bold"/>
-        <TextView
-            android:id="@+id/txtScoreBonus"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="150dp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:layout_below="@+id/txtScore"
-           />
-        <Button
-            android:id="@+id/btnNhanThuong"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="150dp"
-            android:text="Nhận"
-            android:background="@color/salmon"
-            android:layout_below="@+id/txtScoreBonus"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:text="Bonus"
+                android:textSize="30dp" />
+
+            <TextView
+                android:id="@+id/txtBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="20dp"
+                android:text="Back"
+                android:textSize="30dp" />
+
+        </com.google.android.material.bottomnavigation.BottomNavigationView>
+        <RelativeLayout
+            android:layout_marginTop="25dp"
+            android:layout_below="@+id/top"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/txtScore"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="150dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/txtScoreBonus"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="150dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_below="@+id/txtScore"
+                />
+            <Button
+                android:id="@+id/btnNhanThuong"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="150dp"
+                android:text="Nhận"
+                android:background="@color/salmon"
+                android:layout_below="@+id/txtScoreBonus"/>
+        </RelativeLayout>
     </RelativeLayout>
-</RelativeLayout>
 </ScrollView>

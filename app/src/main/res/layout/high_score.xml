@@ -52,8 +52,165 @@
                 <ListView
                     android:id="@+id/listView"
                     android:layout_width="wrap_content"
-                    android:layout_height="500dp"
+                    android:layout_height="200dp"
                     android:layout_gravity="center"
+                    />
+            </LinearLayout>
+            <!-- Tìm kiếm người chơi theo tên -->
+            <LinearLayout
+                android:layout_gravity="center"
+                android:layout_width="300dp"
+                android:layout_height="50dp">
+                <EditText
+                    android:id="@+id/editTextTimKiemTheoTen"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:hint="Nhập tên người chơi"/>
+                <Button
+                    android:id="@+id/btnTimKiemTheoTen"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="Tìm kiếm"
+                    android:background="@color/salmon"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+            <!-- Tìm kiếm người chơi theo điểm chính xác -->
+            <LinearLayout
+                android:layout_gravity="center"
+                android:layout_width="300dp"
+                android:layout_height="50dp">
+                <EditText
+                    android:id="@+id/editTextTimkiemTheoDiemChinhXac"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:hint="Nhập điểm người chơi"/>
+                <Button
+                    android:id="@+id/btnTimKiemTheoDiemChinhXac"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="Tìm kiếm"
+                    android:background="@color/salmon"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+            <!-- Tìm kiếm người chơi theo khoảng điểm -->
+            <LinearLayout
+                android:layout_gravity="center"
+                android:layout_width="300dp"
+                android:layout_height="50dp">
+                <EditText
+                    android:id="@+id/editTextDiemTu"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:hint="Từ"/>
+                <EditText
+                    android:id="@+id/editTextDiemDen"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:hint="Đến"/>
+                <Button
+                    android:id="@+id/btnTimKiemTheoKhoangDiem"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="Tìm kiếm"
+                    android:background="@color/salmon"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+            <!-- Sắp xêp người chơi theo tên AZ, ZA -->
+            <LinearLayout
+                android:layout_gravity="center"
+                android:layout_width="300dp"
+                android:layout_height="100dp">
+                <Button
+                    android:id="@+id/btnSapXepNguoiChoiTheoTenAZ"
+                    android:layout_width="100dp"
+                    android:layout_height="70dp"
+                    android:text="Sắp xếp người chơi theo tên từ A-Z"
+                    android:background="@color/salmon"
+                    />
+                <Button
+                    android:id="@+id/btnSapXepNguoiChoiTheoTenZA"
+                    android:layout_marginStart="15dp"
+                    android:layout_width="100dp"
+                    android:layout_height="70dp"
+                    android:text="Sắp xếp người chơi theo tên từ Z-A"
+                    android:background="@color/salmon"
+
+                    />
+            </LinearLayout>
+            <!-- Top 5 người choi có điểm cao nhất, thấp nhất-->
+            <LinearLayout
+                android:layout_gravity="center"
+                android:layout_width="250dp"
+                android:layout_height="50dp">
+                <!-- nut nay co doi mau-->
+                <Button
+                    android:id="@+id/btnTop5NguoiChoiDiemCaoNhat"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:text="Top 5 cao điểm nhất"
+                    android:background="@color/salmon"
+                    />
+                <Button
+                    android:id="@+id/btnTop5NguoiChoiDiemThapNhat"
+                    android:layout_marginStart="15dp"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:text="Top 5 thấp điểm nhất"
+                    android:background="@drawable/button_selector"
+                    android:clickable="true"
+                    android:focusable="true"
+                    />
+            </LinearLayout>
+
+            <!-- Top 1 người điểm cao nhất, thấp nhất-->
+            <LinearLayout
+                android:layout_gravity="center"
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp">
+                <Button
+                    android:id="@+id/btnNguoiChoiCaoDiemNhat"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:text="Người cao điểm nhất"
+                    android:background="@color/salmon"
+                    />
+                <Button
+                    android:id="@+id/btnNguoiChoiThapDiemNhat"
+                    android:layout_marginStart="15dp"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:text="Người thấp điểm nhất"
+                    android:background="@color/salmon"
+
+                    />
+            </LinearLayout>
+
+            <!-- Top 1 người điểm cao nhất, thấp nhất-->
+            <LinearLayout
+                android:layout_gravity="center"
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp">
+                <Button
+                    android:id="@+id/btnSapXepTheoDiemCaoThap"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:text="Sắp xếp điểm cao - thấp"
+                    android:background="@color/salmon"
+                    />
+                <Button
+                    android:id="@+id/btnSapXepTheoDiemThapCao"
+                    android:layout_marginStart="15dp"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:text="Sắp xếp điểm thấp cao"
+                    android:background="@color/salmon"
+
                     />
             </LinearLayout>
         </LinearLayout>

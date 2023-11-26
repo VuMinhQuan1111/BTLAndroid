@@ -32,7 +32,11 @@ public class MainActivity extends Activity {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("Score");
+    //nut hiển thị số lần chơi
+    Button btnDemSoLanDaChoi;
 
+    //text hiển thị số lần chơi
+    TextView SoLanChoi;
 
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
@@ -49,6 +53,11 @@ public class MainActivity extends Activity {
         medal = findViewById(R.id.medal);
         cre = findViewById(R.id.credit);
 
+        //nut dem so lan da choi
+        btnDemSoLanDaChoi = findViewById(R.id.btnDemSoLanDaChoi);
+        //text hiển thị số lần chơi
+        SoLanChoi = findViewById(R.id.txtSoLanChoi);
+
         final SharedPreferences prefs = getSharedPreferences("game", MODE_PRIVATE);
         isMute = prefs.getBoolean("isMute", false);
 
@@ -58,6 +67,7 @@ public class MainActivity extends Activity {
             volumeCtrl.setImageResource(R.drawable.ic_volume_off_black_24dp);
         else
             volumeCtrl.setImageResource(R.drawable.ic_volume_up_black_24dp);
+
 
         volumeCtrl.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,43 +140,46 @@ public class MainActivity extends Activity {
             }
         });
 
-//        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
-//
-//        bottomNavigationView.setSelectedItemId(R.id.action_home);
-//
-//        //nhấp chuột vào 3 icon ở dưới cùng
-//        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                switch(item.getItemId()){
-//                    case R.id.action_home:
-//                        return true;
-//
-//                    case R.id.action_score:
-//                        startActivity(new Intent(getApplicationContext()
-//                                ,HighScore.class));
-//                        overridePendingTransition(0,0);
-//                        return true;
-//
-//                    case R.id.action_user:
-//                        startActivity(new Intent(getApplicationContext()
-//                                ,User.class));
-//                        overridePendingTransition(0,0);
-//                        return true;
-//
-//                }
-//                return false;
-//            }
-//        });
 
-        //Nhấn vào chơi game
+        //nut đếm số lần đã chơi game
+        btnDemSoLanDaChoi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Lấy số lần chơi từ SharedPreferences và hiển thị
+                int soLanChoi = prefs.getInt("soLanChoi", 0);
+                SoLanChoi.setText("Số lần chơi: " + soLanChoi);
+            }
+        });
 
+        // Nhấn vào chơi game
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Khi nhấn nút play, tăng số lần chơi lên 1 và cập nhật vào SharedPreferences
+                int soLanChoi = prefs.getInt("soLanChoi", 0) + 1;
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putInt("soLanChoi", soLanChoi);
+                editor.apply();
+
                 startActivity(new Intent(MainActivity.this, GameActivity.class));
             }
         });
+        /*cách hiển thị số lần chơi game 2
+                play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Khi nhấn nút play, tăng số lần chơi lên 1 và cập nhật vào SharedPreferences
+                int soLanChoi = prefs.getInt("soLanChoi", 0) + 1;
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putInt("soLanChoi", soLanChoi);
+                editor.apply();
+
+                // Hiển thị số lần chơi
+                SoLanChoi.setText("Số lần chơi: " + soLanChoi);
+                startActivity(new Intent(MainActivity.this, GameActivity.class));
+            }
+        });
+         */
 
         cre.setOnClickListener(new View.OnClickListener(){
 

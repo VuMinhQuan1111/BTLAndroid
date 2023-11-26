@@ -5,4 +5,12 @@
     <color name="skyblue">#40E0D0</color>
     <color name="salmon">#FFBF00</color>
     <color name="darkblue">#2471A3</color>
+    <color name="red">#FF0000</color>
+    <color name="green">#00BB00</color>
+    <color name="blue">#0000EE</color>
+    <color name="gray">#444444</color>
+
+
+
+
 </resources>

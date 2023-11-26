@@ -7,7 +7,12 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,6 +23,8 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     private SensorManager sensorManager;
     private Sensor accelerometerSensor;
     private Sensor lightSensor;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +45,13 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         gameView = new GameView(this, point.x, point.y);
 
         setContentView(gameView);
+
+
     }
 
+
+
+///========================================
     @Override
     protected void onPause() {
         super.onPause();
