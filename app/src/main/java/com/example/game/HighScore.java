@@ -24,6 +24,8 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public class HighScore extends Activity {
+
+
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("Score");
 
@@ -45,6 +47,7 @@ public class HighScore extends Activity {
 
 
     final ArrayList<String> mang = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -2,6 +2,7 @@ package com.example.game;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
@@ -70,16 +71,16 @@ public class SignUp extends AppCompatActivity {
                 String name = edtname.getText().toString();
                 String gmail = edtgmail.getText().toString();
                 String password = edtpassword.getText().toString();
-//                if (TextUtils.isEmpty(edtgmail.getText().toString()))
-//                {
-//                    Toast.makeText(SignUp.this,
-//                            "không được để trống gmail",
-//                            Toast.LENGTH_SHORT).show();
-//                }else if(TextUtils.isEmpty(edtpassword.getText().toString())) {
-//                    Toast.makeText(SignUp.this,
-//                            "không được để trống mật khẩu",
-//                            Toast.LENGTH_SHORT).show();
-//                }
+                if (TextUtils.isEmpty(edtgmail.getText().toString()))
+                {
+                    Toast.makeText(SignUp.this,
+                            "không được để trống gmail",
+                            Toast.LENGTH_SHORT).show();
+                }else if(TextUtils.isEmpty(edtpassword.getText().toString())) {
+                    Toast.makeText(SignUp.this,
+                            "không được để trống mật khẩu",
+                            Toast.LENGTH_SHORT).show();
+                }
 
 //                else if(TextUtils.isEmpty(edtpassword2.getText().toString())) {
 //                    Toast.makeText(SignUp.this,
@@ -90,67 +91,67 @@ public class SignUp extends AppCompatActivity {
 //                            "Xác nhận mật khẩu phải giống mật khẩu",
 //                            Toast.LENGTH_SHORT).show();
 //                }
-//                else
-//                {
-//                    //onClickSignUp();
-//                    Toast.makeText(SignUp.this,"Thành công",Toast.LENGTH_LONG).show();
-//                }
-                boolean check = validateInfo(name, gmail, password);
-                if(check == true){
-                    //Toast.makeText(SignUp.this,"Thành công",Toast.LENGTH_LONG).show();
-                    onClickSignUp();
-                }else{
-                    Toast.makeText(SignUp.this,"Đăng nhập thất bại",Toast.LENGTH_LONG).show();
+                else
+                {
+                    //onClickSignUp();
+                    Toast.makeText(SignUp.this,"Thành công",Toast.LENGTH_LONG).show();
                 }
+//                boolean check = validateInfo(name, gmail, password);
+//                if(check == true){
+//                    //Toast.makeText(SignUp.this,"Thành công",Toast.LENGTH_LONG).show();
+//                    onClickSignUp();
+//                }else{
+//                    Toast.makeText(SignUp.this,"Đăng nhập thất bại",Toast.LENGTH_LONG).show();
+//                }
             }
         });
     }
 
-    private boolean validateInfo(String name, String gmail, String password){
-        if(name.length() == 0){
-            edtname.requestFocus();
-            Toast.makeText(SignUp.this,"Tên không để trống",Toast.LENGTH_LONG).show();
-            return false;
-        }
-
-        else if(gmail.length() == 0){
-            edtgmail.requestFocus();
-            Toast.makeText(SignUp.this,"Gmail không để trống",Toast.LENGTH_LONG).show();
-            return false;
-        }
-        else if(!gmail.matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")){
-            edtgmail.requestFocus();
-            Toast.makeText(SignUp.this,"Gmail không hợp lệ",Toast.LENGTH_LONG).show();
-            return false;
-        }else if(password.length() == 0){
-            edtpassword.requestFocus();
-            Toast.makeText(SignUp.this,"Password không để trống",Toast.LENGTH_LONG).show();
-            return false;
-        }else if(!password.matches("(.*[0-9].*)")){
-            edtpassword.requestFocus();
-            Toast.makeText(SignUp.this,"Password cần 1 số",Toast.LENGTH_LONG).show();
-            return false;
-        }
-        else if(!password.matches("(.*[a-z].*)")){
-            edtpassword.requestFocus();
-            Toast.makeText(SignUp.this,"Password cần 1 chữ thường",Toast.LENGTH_LONG).show();
-            return false;
-        }else if(!password.matches("(.*[A-Z].*)")){
-            edtpassword.requestFocus();
-            Toast.makeText(SignUp.this,"Password cần 1 chữ hoa",Toast.LENGTH_LONG).show();
-            return false;
-        }else if(!password.matches("(.*[!@#$%^&*()_+=\\[{\\]};].*)")){
-            edtpassword.requestFocus();
-            Toast.makeText(SignUp.this,"Password cần 1 ký tự đặc biệt",Toast.LENGTH_LONG).show();
-            return false;
-        }
-//        else if(!password.matches("^0\\d{9}$")){
-//            edtpassword.requestFocus();
-//            Toast.makeText(SignUp.this,"Số điện thoại chưa đúng",Toast.LENGTH_LONG).show();
+//    private boolean validateInfo(String name, String gmail, String password){
+//        if(name.length() == 0){
+//            edtname.requestFocus();
+//            Toast.makeText(SignUp.this,"Tên không để trống",Toast.LENGTH_LONG).show();
 //            return false;
 //        }
-            return true;
-    }
+//
+//        else if(gmail.length() == 0){
+//            edtgmail.requestFocus();
+//            Toast.makeText(SignUp.this,"Gmail không để trống",Toast.LENGTH_LONG).show();
+//            return false;
+//        }
+//        else if(!gmail.matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")){
+//            edtgmail.requestFocus();
+//            Toast.makeText(SignUp.this,"Gmail không hợp lệ",Toast.LENGTH_LONG).show();
+//            return false;
+//        }else if(password.length() == 0){
+//            edtpassword.requestFocus();
+//            Toast.makeText(SignUp.this,"Password không để trống",Toast.LENGTH_LONG).show();
+//            return false;
+//        }else if(!password.matches("(.*[0-9].*)")){
+//            edtpassword.requestFocus();
+//            Toast.makeText(SignUp.this,"Password cần 1 số",Toast.LENGTH_LONG).show();
+//            return false;
+//        }
+//        else if(!password.matches("(.*[a-z].*)")){
+//            edtpassword.requestFocus();
+//            Toast.makeText(SignUp.this,"Password cần 1 chữ thường",Toast.LENGTH_LONG).show();
+//            return false;
+//        }else if(!password.matches("(.*[A-Z].*)")){
+//            edtpassword.requestFocus();
+//            Toast.makeText(SignUp.this,"Password cần 1 chữ hoa",Toast.LENGTH_LONG).show();
+//            return false;
+//        }else if(!password.matches("(.*[!@#$%^&*()_+=\\[{\\]};].*)")){
+//            edtpassword.requestFocus();
+//            Toast.makeText(SignUp.this,"Password cần 1 ký tự đặc biệt",Toast.LENGTH_LONG).show();
+//            return false;
+//        }
+////        else if(!password.matches("^0\\d{9}$")){
+////            edtpassword.requestFocus();
+////            Toast.makeText(SignUp.this,"Số điện thoại chưa đúng",Toast.LENGTH_LONG).show();
+////            return false;
+////        }
+//            return true;
+//    }
 
 
     private void onClickSignUp() {

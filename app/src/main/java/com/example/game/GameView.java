@@ -11,8 +11,10 @@ import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Build;
+import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
@@ -24,14 +26,22 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.w3c.dom.Text;
+
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 public class GameView extends SurfaceView implements Runnable {
 
     private Thread thread;
     private boolean isPlaying, isGameOver = false;
+    private int second = 0;
+    int secs = 0;
+    int minute = 0;
+    int hour = 0;
     private int screenX, screenY, score = 0;
     public static float screenRatioX, screenRatioY;
     private Paint paint;
@@ -284,6 +294,15 @@ public class GameView extends SurfaceView implements Runnable {
             paint.setFakeBoldText(true);
             canvas.drawText(score + "", screenX / 2f, 100, paint);
 
+            paint.setTextSize(50);
+            paint.setColor(Color.BLACK);
+            paint.setFakeBoldText(true);
+            int minutes = second / 3600;
+            int sec = (second % 3600)/60;
+            int milis = second % 60;
+            second++;
+            canvas.drawText("time" + ":"+minutes+":"+sec+":"+milis, screenX / 5f, 100, paint);
+            second++;
 
             if (isGameOver==true) {
                 isPlaying = false;
@@ -435,5 +454,8 @@ public class GameView extends SurfaceView implements Runnable {
         bullets.add(bullet);
 
     }
+
+
+
 }
 

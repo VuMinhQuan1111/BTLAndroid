@@ -8,6 +8,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -23,12 +25,16 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Locale;
+
 public class MainActivity extends Activity {
 
-    private Button highscore, user, play,medal, cre;
+    private Button highscore, user, play, medal, cre;
+    private int second = 0;
+    public boolean running;
     private boolean isMute;
 
-    private TextView score,username;
+    private TextView score, username;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("Score");
@@ -45,11 +51,12 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //running = true;
         highscore = findViewById(R.id.highScore);
         user = findViewById(R.id.userProfile);
         play = findViewById(R.id.play);
-        score=findViewById(R.id.textViewscore);
-        username=findViewById(R.id.ussername);
+        score = findViewById(R.id.textViewscore);
+        username = findViewById(R.id.ussername);
         medal = findViewById(R.id.medal);
         cre = findViewById(R.id.credit);
 
@@ -57,6 +64,7 @@ public class MainActivity extends Activity {
         btnDemSoLanDaChoi = findViewById(R.id.btnDemSoLanDaChoi);
         //text hiển thị số lần chơi
         SoLanChoi = findViewById(R.id.txtSoLanChoi);
+
 
         final SharedPreferences prefs = getSharedPreferences("game", MODE_PRIVATE);
         isMute = prefs.getBoolean("isMute", false);
@@ -93,16 +101,15 @@ public class MainActivity extends Activity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                if(snapshot.exists()){
+                if (snapshot.exists()) {
                     for (DataSnapshot snapshott : snapshot.getChildren()) {
                         //Score scorer = snapshott.getValue(Score.class);
                         ScoreUser usersc = snapshott.getValue(ScoreUser.class);
-                        if(usersc.idus.equals(firebaseUser.getUid())){
-                            username.setText(usersc.name+"");
-                            score.setText(""+usersc.score);
+                        if (usersc.idus.equals(firebaseUser.getUid())) {
+                            username.setText(usersc.name + "");
+                            score.setText("" + usersc.score);
                             break;
-                        }
-                        else{
+                        } else {
 
                         }
                     }
@@ -152,6 +159,8 @@ public class MainActivity extends Activity {
         });
 
         // Nhấn vào chơi game
+        //Nhấn vào chơi game
+
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -164,30 +173,62 @@ public class MainActivity extends Activity {
                 startActivity(new Intent(MainActivity.this, GameActivity.class));
             }
         });
-        /*cách hiển thị số lần chơi game 2
-                play.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Khi nhấn nút play, tăng số lần chơi lên 1 và cập nhật vào SharedPreferences
-                int soLanChoi = prefs.getInt("soLanChoi", 0) + 1;
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putInt("soLanChoi", soLanChoi);
-                editor.apply();
-
-                // Hiển thị số lần chơi
-                SoLanChoi.setText("Số lần chơi: " + soLanChoi);
-                startActivity(new Intent(MainActivity.this, GameActivity.class));
-            }
-        });
-         */
-
-        cre.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, credit.class));
-            }
-        });
-
     }
 }
+//        cách hiển thị số lần chơi game 2
+//                play.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                // Khi nhấn nút play, tăng số lần chơi lên 1 và cập nhật vào SharedPreferences
+//                int soLanChoi = prefs.getInt("soLanChoi", 0) + 1;
+//                SharedPreferences.Editor editor = prefs.edit();
+//                editor.putInt("soLanChoi", soLanChoi);
+//                editor.apply();
+//
+//                // Hiển thị số lần chơi
+//                SoLanChoi.setText("Số lần chơi: " + soLanChoi);
+//                startActivity(new Intent(MainActivity.this, GameActivity.class));
+//            }
+//        });
+//
+//        cre.setOnClickListener(new View.OnClickListener(){
+//
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(MainActivity.this, credit.class));
+//            }
+//        });
+
+
+
+        //runTimer();
+
+//    }
+
+//    public void runTimer(){
+//        //create text view
+//        final TextView timeView = findViewById(R.id.time_view);
+//
+//        //create Handler
+//        final Handler handler = new Handler();
+//        handler.post(new Runnable() {
+//            @Override
+//            public void run() {
+//                int hours = second / 3600;
+//                int minutes = (second % 3600)/60;
+//                int secs = second % 60;
+//
+//                String time = String.format(Locale.getDefault(),
+//                        "%d:%02d:%02d",hours,
+//                        minutes, secs);
+//
+//                timeView.setText(time);
+//                if(running){
+//                    second++;
+//                }
+//                handler.postDelayed(this,1000);
+//
+//            }
+//        });
+//    }
+//}
